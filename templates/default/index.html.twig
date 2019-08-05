@@ -1,0 +1,97 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+
+    <div class="row">
+        <h1>
+            {{ 'titles.translation_tool'|trans({}, 'titles') }}
+        </h1>
+    </div>
+    <div class="row mt-4">
+        <div class="col">
+            <h2>
+                {{ 'titles.live'|trans({}, 'titles') }}
+            </h2>
+        </div>
+        <div class="col">
+            <span>
+                {{ 'messages.live_description'|trans({}, 'messages') }}
+            </span>
+        </div>
+    </div>
+    <div class="row mt-4">
+        <div class="col">
+            <h2>
+                {{ 'titles.static'|trans({}, 'titles') }}
+            </h2>
+        </div>
+        <div class="col">
+            <span>
+                {{ 'messages.static_description'|trans({}, 'messages') }}
+            </span>
+        </div>
+    </div>
+    <div class="row mt-4">
+        <div class="col">
+            <h2>
+                {{ 'titles.search'|trans({}, 'titles') }}
+            </h2>
+        </div>
+        <div class="col">
+            <span>
+                {{ 'messages.search_description'|trans({}, 'messages') }}
+            </span>
+        </div>
+    </div>
+    <div class="row mt-4">
+        <div class="col">
+            <h2>
+                {{ 'titles.statistic'|trans({}, 'titles') }}
+            </h2>
+        </div>
+        <div class="col">
+            <span>
+                {{ 'messages.statistic_description'|trans({}, 'messages') }}
+            </span>
+        </div>
+    </div>
+    <div class="row mt-4">
+        <div class="col">
+            <h2>
+                {{ 'titles.import'|trans({}, 'titles') }}
+            </h2>
+        </div>
+        <div class="col">
+            <span>
+                {{ 'messages.import_description'|trans({}, 'messages') }}
+            </span>
+        </div>
+    </div>
+    <div class="row mt-4">
+        <div class="col">
+            <h2>
+                {{ 'titles.export'|trans({}, 'titles') }}
+            </h2>
+        </div>
+        <div class="col">
+            <span>
+                {{ 'messages.export_description'|trans({}, 'messages') }}
+            </span>
+        </div>
+    </div>
+    <div class="row mt-4">
+        <div class="col">
+            <h2>
+                {{ 'titles.clear'|trans({}, 'titles') }}
+            </h2>
+        </div>
+        <div class="col">
+            <span>
+                {{ 'messages.clear_description'|trans({}, 'messages') }}
+            </span>
+        </div>
+    </div>
+
+{% endblock %}
+
+{% block stylesheets %}
+{% endblock %}

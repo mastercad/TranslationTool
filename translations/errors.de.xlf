@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
+  <file source-language="en" target-language="de" datatype="plaintext" original="file.ext">
+    <header>
+      <tool tool-id="symfony" tool-name="Symfony"/>
+    </header>
+    <body>
+      <trans-unit id="oOn.GJQ" resname="errors.nothing_selected">
+        <source>errors.nothing_selected</source>
+        <target>Bitte wählen sie eine Übersetzungsdatei oder eine Sprache, in die übersetzt werden soll, aus!</target>
+      </trans-unit>
+      <trans-unit id="GvfDUUb" resname="errors.file_not_found">
+        <source>errors.file_not_found</source>
+        <target>Datei %filename% nicht gefunden!</target>
+      </trans-unit>
+      <trans-unit id="SCx4SV0" resname="errors.nothing_selected_for_static">
+        <source>errors.nothing_selected_for_static</source>
+        <target>Bitte Ursprungssprache, Übersetzungssprache und einen zu Übersetzende Datei auswählen!</target>
+      </trans-unit>
+      <trans-unit id="8g4qKMe" resname="errors.no_static_without_import">
+        <source>errors.no_static_without_import</source>
+        <target>Bitte erst eine Übersetzungsdatei Archiv importieren, bevor diese Funktionalität genutzt werden kann!</target>
+      </trans-unit>
+      <trans-unit id="2.aqXV4" resname="errors.translations_could_not_deleted">
+        <source>errors.translations_could_not_deleted</source>
+        <target>Übersetungen konnten nicht gelöscht werden!</target>
+      </trans-unit>
+      <trans-unit id="VQ53DFq" resname="errors.translations_directory_not_writeable">
+        <source>errors.translations_directory_not_writeable</source>
+        <target>Translations Directory ist nicht beschreibbar!</target>
+      </trans-unit>
+      <trans-unit id="yrC3Lqx" resname="errors.export_file_not_found">
+        <source>errors.export_file_not_found</source>
+        <target>Export Datei nicht gefunden!</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

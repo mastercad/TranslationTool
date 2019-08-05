@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <title>{% block title %}Translation Tool{% endblock %}</title>
+        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+
+<!--         <link href="{{ asset('/css/ui.totop') }}" rel="stylesheet">-->
+<!--         <link href="{{ asset('/css/flag-icon.min') }}" rel="stylesheet">-->
+
+        {% block stylesheets %}
+            {{ encore_entry_link_tags('app') }}
+        {% endblock %}
+
+<!--        <script src="{{ asset('/js/jquery.ui.totop') }}"></script>-->
+
+    </head>
+    <body>
+    {% set route = app.request.attributes.get('_route') %}
+
+        <nav class="navbar fixed-top navbar-expand-lg navbar-light bg-light">
+            <a class="navbar-brand" href="/">Translation Tool</a>
+            <button class="navbar-toggler" type="button"
+                    data-toggle="collapse"
+                    data-target="#navbarSupportedContent"
+                    aria-controls="navbarSupportedContent"
+                    aria-expanded="false"
+                    aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item {{ 'new-translation' == route ? 'active' }}">
+                        <a href="{{ path('new-translation') }}"
+                           class="nav-link"
+                           data-toggle="tooltip"
+                           title="{{ 'messages.live_description'|trans({}, 'messages') }}">
+                            {{ 'titles.live'|trans({}, 'titles') }}
+                            {{ 'new-translation' == route ? '<span class="sr-only">(current)</span>' }}
+                        </a>
+                    </li>
+                    <li class="nav-item {{ 'static' == route ? 'active' }}">
+                        <a href="{{ path('static') }}"
+                           class="nav-link"
+                           data-toggle="tooltip"
+                           title="{{ 'messages.static_description'|trans({}, 'messages') }}">
+                            {{ 'titles.static'|trans({}, 'titles') }}
+                            {{ 'static' == route ? '<span class="sr-only">(current)</span>' }}
+                        </a>
+                    </li>
+                    <li class="nav-item {{ 'search' == route ? 'active' }}">
+                        <a id="search" href="{{ path('search') }}"
+                           class="nav-link"
+                           data-toggle="tooltip"
+                           title="{{ 'messages.search_description'|trans({}, 'messages') }}">
+                            {{ 'titles.search'|trans({}, 'titles') }}
+                            {{ 'search' == route ? '<span class="sr-only">(current)</span>' }}
+                        </a>
+                    </li>
+                    <li class="nav-item {{ 'stats' == route ? 'active' }}">
+                        <a href="{{ path('stats') }}"
+                           class="nav-link"
+                           data-toggle="tooltip"
+                           title="{{ 'messages.statistic_description'|trans({}, 'messages') }}">
+                            {{ 'titles.statistic'|trans({}, 'titles') }}
+                            {{ 'stats' == route ? '<span class="sr-only">(current)</span>' }}
+                        </a>
+                    </li>
+                    <li class="nav-item {{ 'import' == route ? 'active' }}">
+                        <a href="{{ path('import') }}"
+                           class="nav-link"
+                           data-toggle="tooltip"
+                           title="{{ 'messages.import_description'|trans({}, 'messages') }}">
+                            {{ 'titles.import'|trans({}, 'titles') }}
+                            {{ 'import' == route ? '<span class="sr-only">(current)</span>' }}
+                        </a>
+                    </li>
+                    <li class="nav-item {{ 'export' == route ? 'active' }}">
+                        <a href="{{ path('export-translations') }}"
+                           class="nav-link"
+                           data-toggle="tooltip"
+                           title="{{ 'messages.export_description'|trans({}, 'messages') }}">
+                            {{ 'titles.export'|trans({}, 'titles') }}
+                            {{ 'export' == route ? '<span class="sr-only">(current)</span>' }}
+                        </a>
+                    </li>
+                    <li class="nav-item {{ 'clear' == route ? 'active' }}">
+                        <a id="imports_delete"
+                           href="{{ path('clear-translations') }}"
+                           class="nav-link" data-toggle="tooltip"
+                           title="{{ 'messages.clear_description'|trans({}, 'messages') }}">
+                            {{ 'titles.clear'|trans({}, 'titles') }}
+                            {{ 'clear' == route ? '<span class="sr-only">(current)</span>' }}
+                        </a>
+                    </li>
+                </ul>
+
+                <div class="navbar-right media-middle">
+                    {% set route_params = app.request.attributes.get('_route_params') %}
+                    {# merge the query string params if you want to keep them when switching the locale #}
+                    {% set route_params = route_params|merge(app.request.query.all) %}
+
+                    {% set route_params = route_params|merge({'_locale': 'de'}) %}
+                    <a href="{{ path(app.request.attributes.get('_route'), route_params) }}">
+                        <span class="flag-icon flag-icon-de"></span>
+                    </a>
+                    {% set route_params = route_params|merge({'_locale': 'en'}) %}
+                    <a href="{{ path(app.request.attributes.get('_route'), route_params) }}">
+                        <span class="flag-icon flag-icon-gb"></span>
+                    </a>
+                </div>
+            </div>
+        </nav>
+
+        <div class="container">
+            {% block body %}{% endblock %}
+        </div>
+
+        <div class="top-anchor"></div>
+
+        {% block javascripts %}
+            {{ encore_entry_script_tags('app') }}
+        {% endblock %}
+
+        <script type="text/javascript" language="javascript">
+            $(document).ready(function() {
+                $('#imports_delete').unbind('click').click(function() {
+                    if (!confirm('{{ 'messages.warning_delete'|trans({}, 'messages') }}')) {
+                        return false;
+                    }
+                });
+
+                $('[data-toggle="tooltip"]').tooltip();
+            });
+
+            $('.top-anchor').UItoTop();
+        </script>
+
+    </body>
+</html>

@@ -1,0 +1,31 @@
+{# app/Resources/views/default/new.html.twig #}
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="row">
+        <h1>
+            {{ 'titles.live_translation'|trans({}, 'titles') }}
+        </h1>
+    </div>
+
+    <div class="row">
+        <div class="col-xs-12 col-sm-6 col-lg-12">
+            <div class="box">
+                <div class="icon">
+                    <div class="image"><i class="fa fa-exclamation"></i></div>
+                    <div class="info">
+                        <h3 class="title">{{ 'globals.exclamation'|trans({}, 'globals') }}:</h3>
+                        <p>
+                            {{ 'messages.exclamation_live_translation' | trans({}, 'messages') | nl2br }}
+                        </p>
+                    </div>
+                </div>
+                <div class="space"></div>
+            </div>
+        </div>
+    </div>
+
+    {{ form_start(form) }}
+        {{ form(form) }}
+    {{ form_end(form) }}
+{% endblock %}

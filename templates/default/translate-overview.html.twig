@@ -1,0 +1,191 @@
+{# app/Resources/views/default/translate-overview.html.twig #}
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+<div class="row">
+    <h1>{{ 'titles.static'|trans({}, 'titles') }}</h1>
+</div>
+
+<div class="row">
+    <div class="btn-group">
+        <button type="button" class="btn btn-default filter-empty">
+            {{ 'labels.show_only_empty_elements'|trans({}, 'labels') }}
+        </button>
+
+        <button type="button" class="btn btn-default">
+            <span class="empty-element-counter">
+            </span>
+            {{ 'labels.elements_left'|trans({}, 'labels') }}
+        </button>
+    </div>
+</div>
+
+<a name="top" ></a>
+
+<div style="margin-top: 15px;">
+    {{ form_start(form, {action:path('export')}) }}
+        {{ form(form) }}
+    {{ form_end(form) }}
+</div>
+
+<div id="dialog" title="{{ 'titles.translation_request'|trans({}, 'titles') }}">
+</div>
+
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+
+    <script type="application/javascript" language="JavaScript">
+        var googleLanguageInitialized = false;
+        var srcLang = '{{ source_language }}';
+
+        $(document).ready(function() {
+
+            var submitted = false;
+            $('form').submit(function() {
+                 submitted = true;
+            });
+
+            var translationsChanged = function() {
+                if (submitted) {
+                    return false;
+                }
+                var changed = false;
+
+                $('input.translation').each(function() {
+                    changed = changed || ($(this).data('orig-value') !== $(this).val());
+                    if (changed) {
+                        return changed;
+                    }
+                });
+                return changed;
+            };
+
+            $('input.translation').each(function() {
+                $(this).data('orig-value', $(this).val());
+            });
+
+            $(window).bind('beforeunload', function() {
+                if (translationsChanged()) {
+                    return '{{ 'messages.confirm_page_unload_with_form_changes'|trans({}, 'messages') }}';
+                }
+            });
+
+            $('.filter-empty').unbind('click').on('click', function() {
+                if (true === $(this).data('filtered')) {
+                    $('.translation:not(.translation-empty)').parent().parent().parent().parent().parent().show();
+                    $(this).html('{{ 'labels.show_only_empty_elements'|trans({}, 'labels') }}');
+                    $(this).data('filtered', false);
+                    $(this).removeClass('filter-active');
+                } else {
+                    $('.translation:not(.translation-empty)').parent().parent().parent().parent().parent().hide();
+                    $(this).html('{{ 'labels.show_all_elements'|trans({}, 'labels') }}');
+                    $(this).data('filtered', true);
+                    $(this).addClass('filter-active');
+                }
+            });
+
+            $('input.translation.form-control').each(function() {
+                $(this).unbind('blur').on('blur', function() {
+                    if (0 < $(this).val().length) {
+                        if (true === $('.filter-empty').data('filtered')) {
+                            $(this).parent().parent().parent().parent().parent().hide();
+                        }
+                        $(this).removeClass('translation-empty');
+                    } else {
+                        $(this).addClass('translation-empty');
+                    }
+                    refreshEmptyElementCounter();
+                });
+
+                var translationIcon = $(
+                    '<span style="position: absolute; top: 5px; right: -20px; font-size: 30px; cursor: pointer;" ' +
+                        'class="fa fa-globe" ' +
+                        'title="' + "{{ 'labels.click_here_to_get_translation'|trans({}, 'labels') }}" + '">' +
+                    '</span>'
+                );
+
+                $(translationIcon).click(function() {
+                    var toLang = $('#form_translation_language').val();
+                    var currentTextToTranslate =
+                        $(this).parent()
+                            .parent()
+                            .parent()
+                            .find('div.form-group:first')
+                            .find('div.col-sm-10')
+                            .find('input.form-control')
+                            .val();
+
+                    var self = this;
+                    $.get('https://translate.googleapis.com/translate_a/single', {
+                        'client': 'gtx',
+                        'q': currentTextToTranslate,
+                        'sl': srcLang,
+                        'tl': toLang,
+                        'dt': 't'
+                    }, function(result) {
+                        let translations = result[0];
+                        let translated = '';
+                        $(translations).each(function(key,translation) {
+                            translated += translation[0];
+                        });
+                        $("#dialog")
+                            .html('{{ 'messages.question_use_this_translated_text'|trans({}, 'messages') }} : '+
+                                '<br /><br /><b><i>'+translated+'</i></b>')
+                            .dialog({
+                                dialogClass: "no-close",
+                                buttons: [
+                                    {
+                                        text: "OK",
+                                        click: function() {
+                                            $(self).parent().find('input.form-control').val(translated);
+                                            $(this).dialog("close");
+                                        }
+                                    }
+                                ]
+                            });
+                    });
+                });
+                $(this).parent().css({position: 'relative'}).append(translationIcon);
+            });
+
+            refreshEmptyElementCounter();
+
+            jQuery.fn.highlight = function(time) {
+                $(this).each(function() {
+                    var el = $(this);
+                    el.before("<div/>");
+                    el.prev()
+                        .width(el.width())
+                        .height(el.height())
+                        .css({
+                            "position": "absolute",
+                            "background-color": "#ffff99",
+                            "opacity": ".9"
+                        })
+                        .fadeOut(time);
+                });
+            };
+
+            var urlParts = location.href.split('#');
+            if (urlParts[1] !== undefined) {
+                var element = $('#form_'+urlParts[1]+'_translation');
+                $("html, body").delay(100).animate({
+                    scrollTop: element.parent().parent().parent().parent().offset().top
+                }, 1000, function() {
+                    element.parent().parent().parent().parent().parent().highlight(3000);
+                    element.focus();
+                });
+            }
+        });
+
+        /**
+         * refresh counter of not filled or same elements
+         */
+        function refreshEmptyElementCounter() {
+            $('.empty-element-counter').html($('.translation-empty').length);
+        }
+    </script>
+{% endblock %}

@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="row alert alert-danger">
+        <ul class="list-unstyled mb-0">
+            <li>
+            <span class="initialism form-error-icon badge badge-danger">
+                Fehler
+            </span>
+                <span class="form-error-message">
+                {{ message }}
+            </span>
+            </li>
+        </ul>
+    </div>
+{% endblock %}

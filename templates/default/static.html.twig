@@ -1,0 +1,33 @@
+{# app/Resources/views/default/static.html.twig #}
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="row">
+        <h1>
+            {{ 'titles.static'|trans({}, 'titles') }}
+        </h1>
+    </div>
+
+    <div class="row">
+        <div class="col-xs-12 col-sm-6 col-lg-12">
+            <div class="box">
+                <div class="icon">
+                    <div class="image"><i class="fa fa-exclamation"></i></div>
+                    <div class="info">
+                        <h3 class="title">{{ 'globals.exclamation'|trans({}, 'globals') }}:</h3>
+                        <p>
+                            {{ 'messages.exclamation_static' | trans({}, 'messages') | nl2br }}
+                        </p>
+                    </div>
+                </div>
+                <div class="space"></div>
+            </div>
+        </div>
+    </div>
+
+    {% set choose_source_language_placeholder = 'messages.choose_source_language'|trans({}, 'messages') %}
+
+    {{ form_start(form) }}
+        {{ form(form) }}
+    {{ form_end(form) }}
+{% endblock %}

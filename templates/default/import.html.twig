@@ -1,0 +1,31 @@
+{# app/Resources/views/default/upload.html.twig #}
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="row">
+        <h1>
+            {{ 'titles.import'|trans({}, 'titles') }}
+        </h1>
+    </div>
+
+    <div class="row">
+        <div class="col-xs-12 col-sm-6 col-lg-12">
+            <div class="box">
+                <div class="icon">
+                    <div class="image"><i class="fa fa-warning"></i></div>
+                    <div class="info">
+                        <h3 class="title">{{ 'globals.warning'|trans({}, 'globals') }}:</h3>
+                        <p>
+                            {% trans %}messages.import_overwrite_all_data{% endtrans %}
+                        </p>
+                    </div>
+                </div>
+                <div class="space"></div>
+            </div>
+        </div>
+    </div>
+
+    {{ form_start(form) }}
+        {{ form(form) }}
+    {{ form_end(form) }}
+{% endblock %}

@@ -1,0 +1,61 @@
+{# app/Resources/views/default/stats.html.twig #}
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    <div class="row">
+        <h1>
+            {{ 'labels.translations_per_file_for_statistic'|trans({}, 'labels')}}
+        </h1>
+    </div>
+
+    {% for file, statsEntry in statsCollection %}
+        <div class="row" style="margin-top: 15px;" >
+            <div>
+                {{ 'labels.file_name'|trans({}, 'labels') }}: <b>{{ file }}</b>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                {{ 'labels.language'|trans({}, 'labels') }}
+            </div>
+            <div class="col">
+                {{ 'labels.translated'|trans({}, 'labels') }}
+            </div>
+            <div class="col">
+                {{ 'labels.to_translate'|trans({}, 'labels') }}
+            </div>
+            <div class="col">
+                {{ 'labels.same'|trans({}, 'labels') }}
+            </div>
+            <div class="col">
+                {{ 'labels.empty'|trans({}, 'labels') }}
+            </div>
+        </div>
+
+        {% for language, count in statsEntry %}
+            <div class="row row-hover">
+                <div class="col">
+                    {{ language }}
+                </div>
+                <div class="col">
+                    {{ count['translated'] ? count['translated'] : 0 }}
+                </div>
+                <div class="col">
+                    {{ count['items'] ? count['items'] : 0 }}
+                </div>
+                <div class="col">
+                    {{ count['same'] ? count['same'] : 0 }}
+                </div>
+                <div class="col">
+                    {{ count['empty'] ? count['empty'] : 0 }}
+                </div>
+                <div class="col">
+                    <a href="{{ path('translate-overview') }}?from={{ file }}.{{ sourceLanguage }}.xlf&amp;to={{ file }}.{{ language }}.xlf&amp;lang={{ language }}&amp;exportFileName={{ file }}.{{ language }}.xlf&amp;sourceLanguage={{ sourceLanguage }}&amp;action=stats">
+                        {{ 'labels.edit'|trans({}, 'labels') }}
+                    </a>
+                </div>
+            </div>
+        {% endfor %}
+    {% endfor %}
+{% endblock %}

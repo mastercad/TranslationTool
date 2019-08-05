@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
+  <file source-language="en" target-language="de" datatype="plaintext" original="file.ext">
+    <header>
+      <tool tool-id="symfony" tool-name="Symfony"/>
+    </header>
+    <body>
+      <trans-unit id="aZQ7yXH" resname="messages.successfully_imported">
+        <source>messages.successfully_imported</source>
+        <target>Übersetzungsdatei vollständig importiert!</target>
+      </trans-unit>
+      <trans-unit id="dNPEPL0" resname="messages.import_overwrite_all_data">
+        <source>messages.import_overwrite_all_data</source>
+        <target>Das Einspielen eines neuen Archives überschreibt alle Dateien auf dem Server!</target>
+      </trans-unit>
+      <trans-unit id="QgBv1gs" resname="messages.exclamation_live_translation">
+        <source>messages.exclamation_live_translation</source>
+        <target>Ursprungsdatei hoch laden und wahlweise eine Datei, in die übersetzt werden soll auswählen, oder eine Sprache in die übersetzt werden soll (dabei wird mit einer leeren Datei begonnen)
+                    eine der beiden wahlmöglichkeiten muss ausgewählt werden, um fortzufahren.</target>
+      </trans-unit>
+      <trans-unit id="QIpu4Q." resname="messages.live_description">
+        <source>messages.live_description</source>
+        <target>um eine einzelne Datei zu übersetzen.</target>
+      </trans-unit>
+      <trans-unit id="s3SFKvQ" resname="messages.static_description">
+        <source>messages.static_description</source>
+        <target>um alle Dateien des importierten Archives zu übersetzen.</target>
+      </trans-unit>
+      <trans-unit id="GFTAHze" resname="messages.statistic_description">
+        <source>messages.statistic_description</source>
+        <target>Zeigt eine Übersicht aller importierten Überetzungsdateien und deren Übersetzungsfortschritt, basierend auf der Englishen Version der Datei.</target>
+      </trans-unit>
+      <trans-unit id="AC4ZCzl" resname="messages.import_upload">
+        <source>messages.import_upload</source>
+        <target>Ein neues Übersetzungspaket hoch laden.</target>
+      </trans-unit>
+      <trans-unit id="MP6Wgmf" resname="messages.import_description">
+        <source>messages.import_description</source>
+        <target>Importiert ein ZIP Archiv mit Übersetzungsdateien zum statischen Übersetzen der Dateien.</target>
+      </trans-unit>
+      <trans-unit id="I0G_Z2O" resname="messages.export_description">
+        <source>messages.export_description</source>
+        <target>Exportiert ein ZIP Archiv mit allen auf dem Server vorhandenen Übersetzungsdateien.</target>
+      </trans-unit>
+      <trans-unit id="3OznHj7" resname="messages.clear_description">
+        <source>messages.clear_description</source>
+        <target>Löscht alle importierten Übersetzungsdateien. Bitte exportieren sie vorher, um ihre Arbeit zu sichern!</target>
+      </trans-unit>
+      <trans-unit id="d2JV44Y" resname="messages.question_use_this_translated_text">
+        <source>messages.question_use_this_translated_text</source>
+        <target>Diese Übersetzung verwenden?</target>
+      </trans-unit>
+      <trans-unit id="ehHJKWb" resname="messages.warning_delete">
+        <source>messages.warning_delete</source>
+        <target>Achtung! Wollen sie wirklich alle importierten Übersetzungs Dateien löschen?</target>
+      </trans-unit>
+      <trans-unit id="MgjYO8s" resname="messages.exclamation_static">
+        <source>messages.exclamation_static</source>
+        <target>Wählen Sie eine Ursprungssprache, die zu übersetzende Datei und die Sprache, in die übersetzt werden soll!</target>
+      </trans-unit>
+      <trans-unit id="o9AKsce" resname="messages.exclamation_search">
+        <source>messages.exclamation_search</source>
+        <target>Geben Sie einen Übersetzungstoken ein und klicken sie auf Edit hinter der gewünschten Datei, um sie zu übersetzen!</target>
+      </trans-unit>
+      <trans-unit id="7D_4lkv" resname="messages.search_description">
+        <source>messages.search_description</source>
+        <target>Ermöglicht das Suchen nach bestimmten token und das übersetzen einer speziellen Datei, in der dieser Token enthalten ist.</target>
+      </trans-unit>
+      <trans-unit id="7MtHFPW" resname="messages.confirm_page_unload_with_form_changes">
+        <source>messages.confirm_page_unload_with_form_changes</source>
+        <target>Es sieht so aus, als wären Daten geändert worden. Wenn diese Seite verlassen wird, gehen diese Daten verloren!</target>
+      </trans-unit>
+      <trans-unit id="yVprytg" resname="messages.search_text_prevent_form_submit">
+        <source>messages.search_text_prevent_form_submit</source>
+        <target>Bitte geben sie im Suchfeld ihren Suchbegriff ein und wählen sie aus den Vorschlägen ihre Suche aus. Ein absenden des Formulars ist nicht notwendig!</target>
+      </trans-unit>
+      <trans-unit id="AKkHI6D" resname="messages.no_results_found_for_search">
+        <source>messages.no_results_found_for_search</source>
+        <target>Für die Suche wurden keine Treffer gefunden!</target>
+      </trans-unit>
+      <trans-unit id="oA5R0yR" resname="messages.translations_successfully_deleted">
+        <source>messages.translations_successfully_deleted</source>
+        <target>Übersetzungen erfolgreich gelöscht.</target>
+      </trans-unit>
+      <trans-unit id="osAgocK" resname="messages.choose_source_language">
+        <source>messages.choose_source_language</source>
+        <target>__messages.choose_source_language</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

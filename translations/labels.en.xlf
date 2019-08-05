@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
+  <file source-language="en" target-language="en" datatype="plaintext" original="file.ext">
+    <header>
+      <tool tool-id="symfony" tool-name="Symfony"/>
+    </header>
+    <body>
+      <trans-unit id="P1TcoRe" resname="labels.export">
+        <source>labels.export</source>
+        <target>Export</target>
+      </trans-unit>
+      <trans-unit id="6RSQLtH" resname="labels.save">
+        <source>labels.save</source>
+        <target>Save</target>
+      </trans-unit>
+      <trans-unit id="YisWIyY" resname="labels.show_only_empty_elements">
+        <source>labels.show_only_empty_elements</source>
+        <target>Show only Empty Elements.</target>
+      </trans-unit>
+      <trans-unit id="6UbjbCz" resname="labels.elements_left">
+        <source>labels.elements_left</source>
+        <target>empty Elements left.</target>
+      </trans-unit>
+      <trans-unit id="ypFfcqd" resname="labels.show_all_elements">
+        <source>labels.show_all_elements</source>
+        <target>Show all Elements.</target>
+      </trans-unit>
+      <trans-unit id="tX66jgt" resname="labels.source_xliff_file">
+        <source>labels.source_xliff_file</source>
+        <target>Source XLIFF File</target>
+      </trans-unit>
+      <trans-unit id="lCYM8Xw" resname="labels.translation_xliff_file">
+        <source>labels.translation_xliff_file</source>
+        <target>Translation XLIFF File</target>
+      </trans-unit>
+      <trans-unit id="98BXaAm" resname="labels.translation_language">
+        <source>labels.translation_language</source>
+        <target>Translation Language</target>
+      </trans-unit>
+      <trans-unit id="D5ndRCU" resname="labels.translation_package_file">
+        <source>labels.translation_package_file</source>
+        <target>Translation package zip file</target>
+      </trans-unit>
+      <trans-unit id="grnDemD" resname="labels.source_language">
+        <source>labels.source_language</source>
+        <target>Source Language</target>
+      </trans-unit>
+      <trans-unit id="6TJkglw" resname="labels.choose_source_language">
+        <source>labels.choose_source_language</source>
+        <target>Please choose the source language.</target>
+      </trans-unit>
+      <trans-unit id="jyNnABU" resname="labels.source_file">
+        <source>labels.source_file</source>
+        <target>Source File</target>
+      </trans-unit>
+      <trans-unit id="ysNnfCD" resname="labels.choose_translation_language">
+        <source>labels.choose_translation_language</source>
+        <target>Please choose the language what you want to translate.</target>
+      </trans-unit>
+      <trans-unit id="eQPIYAj" resname="labels.translate">
+        <source>labels.translate</source>
+        <target>Translate</target>
+      </trans-unit>
+      <trans-unit id="2qcAZIn" resname="labels.export_file_name">
+        <source>labels.export_file_name</source>
+        <target>Export File Name</target>
+      </trans-unit>
+      <trans-unit id="FeS1k3i" resname="labels.translations_per_file_for_statistic">
+        <source>labels.translations_per_file_for_statistic</source>
+        <target>Translated Positions per file / language</target>
+      </trans-unit>
+      <trans-unit id="OjnvC_7" resname="labels.translated">
+        <source>labels.translated</source>
+        <target>Translated</target>
+      </trans-unit>
+      <trans-unit id="xe89RoP" resname="labels.to_translate">
+        <source>labels.to_translate</source>
+        <target>To Translate</target>
+      </trans-unit>
+      <trans-unit id="KbBQfgG" resname="labels.same">
+        <source>labels.same</source>
+        <target>Same</target>
+      </trans-unit>
+      <trans-unit id="gPEAdhX" resname="labels.empty">
+        <source>labels.empty</source>
+        <target>Empty</target>
+      </trans-unit>
+      <trans-unit id="10v.221" resname="labels.edit">
+        <source>labels.edit</source>
+        <target>Edit</target>
+      </trans-unit>
+      <trans-unit id="gF7exfk" resname="labels.language">
+        <source>labels.language</source>
+        <target>Language</target>
+      </trans-unit>
+      <trans-unit id="vr9qjX8" resname="labels.click_here_to_get_translation">
+        <source>labels.click_here_to_get_translation</source>
+        <target>Click here to get Translation</target>
+      </trans-unit>
+      <trans-unit id="iry6djU" resname="labels.search_token">
+        <source>labels.search_token</source>
+        <target>Search String</target>
+      </trans-unit>
+      <trans-unit id="upFeHkc" resname="labels.search_in_tokens">
+        <source>labels.search_in_tokens</source>
+        <target>Search in Tokens</target>
+      </trans-unit>
+      <trans-unit id="K9d1lDq" resname="labels.search_in_translations">
+        <source>labels.search_in_translations</source>
+        <target>Search in Translations</target>
+      </trans-unit>
+      <trans-unit id="eerYfCo" resname="labels.search_type">
+        <source>labels.search_type</source>
+        <target>Search Typ</target>
+      </trans-unit>
+      <trans-unit id="AVip6cC" resname="labels.search_type_any">
+        <source>labels.search_type_any</source>
+        <target>String matches on every Place</target>
+      </trans-unit>
+      <trans-unit id="Cu3z4vq" resname="labels.search_type_begin">
+        <source>labels.search_type_begin</source>
+        <target>Match starts with string</target>
+      </trans-unit>
+      <trans-unit id="WGgR66e" resname="labels.search_type_end">
+        <source>labels.search_type_end</source>
+        <target>Match ends with string</target>
+      </trans-unit>
+      <trans-unit id="T6w_hwa" resname="labels.file_name">
+        <source>labels.file_name</source>
+        <target>Filename</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

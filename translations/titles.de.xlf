@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
+  <file source-language="en" target-language="de" datatype="plaintext" original="file.ext">
+    <header>
+      <tool tool-id="symfony" tool-name="Symfony"/>
+    </header>
+    <body>
+      <trans-unit id="xHX78zI" resname="titles.live_translation">
+        <source>titles.live_translation</source>
+        <target>Direkte Übersetzung</target>
+      </trans-unit>
+      <trans-unit id="d9jYNya" resname="titles.translation_tool">
+        <source>titles.translation_tool</source>
+        <target>Translation Tool</target>
+      </trans-unit>
+      <trans-unit id="_NPkor7" resname="titles.live">
+        <source>titles.live</source>
+        <target>Direkt</target>
+      </trans-unit>
+      <trans-unit id="xHDep.9" resname="titles.static">
+        <source>titles.static</source>
+        <target>Statisch</target>
+      </trans-unit>
+      <trans-unit id="0.aS4F_" resname="titles.statistic">
+        <source>titles.statistic</source>
+        <target>Statistiken</target>
+      </trans-unit>
+      <trans-unit id="QErgcLS" resname="titles.import">
+        <source>titles.import</source>
+        <target>Importieren</target>
+      </trans-unit>
+      <trans-unit id="cBG_dcw" resname="titles.export">
+        <source>titles.export</source>
+        <target>Exportieren</target>
+      </trans-unit>
+      <trans-unit id="plpw2Vn" resname="titles.clear">
+        <source>titles.clear</source>
+        <target>Löschen</target>
+      </trans-unit>
+      <trans-unit id="c9MiHc9" resname="titles.search">
+        <source>titles.search</source>
+        <target>Suchen</target>
+      </trans-unit>
+      <trans-unit id="ngx0W3S" resname="titles.translation_request">
+        <source>titles.translation_request</source>
+        <target>Übersetzungsanfrage</target>
+      </trans-unit>
+      <trans-unit id="F0kpH6E" resname="titles.search_information_dialog">
+        <source>titles.search_information_dialog</source>
+        <target>Information</target>
+      </trans-unit>
+      <trans-unit id="Yx6_R0G" resname="titles.untouched">
+        <source>titles.untouched</source>
+        <target>Unverändert</target>
+      </trans-unit>
+      <trans-unit id="pkrIIpY" resname="titles.touched">
+        <source>titles.touched</source>
+        <target>Angepasst</target>
+      </trans-unit>
+      <trans-unit id="mAG9Xfp" resname="titles.touched_date">
+        <source>titles.touched_date</source>
+        <target>Angepasst am %date%</target>
+      </trans-unit>
+      <trans-unit id="HDT6O5h" resname="titles.same_like_source">
+        <source>titles.same_like_source</source>
+        <target>Entspricht dem Ursprung (en)</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

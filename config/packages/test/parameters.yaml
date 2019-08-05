@@ -1,0 +1,4 @@
+parameters:
+    xliff_directory: '%kernel.root_dir%/../tests/tmp/uploads/xliff'
+    upload_directory: '%kernel.root_dir%/../tests/tmp/uploads/xliff'
+    translations_directory: '%kernel.root_dir%/../tests/tmp/translations'

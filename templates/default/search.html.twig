@@ -1,0 +1,377 @@
+{# app/Resources/views/default/search.html.twig #}
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="row">
+        <h1>
+            {{ 'titles.search'|trans({}, 'titles') }}
+        </h1>
+    </div>
+
+    <div class="row">
+        <div class="col-xs-12 col-sm-6 col-lg-12">
+            <div class="box">
+                <div class="icon">
+                    <div class="image"><i class="fa fa-exclamation"></i></div>
+                    <div class="info">
+                        <h3 class="title">{{ 'globals.exclamation'|trans({}, 'globals') }}:</h3>
+                        <p>
+                            {{ 'messages.exclamation_search' | trans({}, 'messages') | nl2br }}
+                        </p>
+                    </div>
+                </div>
+                <div class="space"></div>
+            </div>
+        </div>
+    </div>
+
+    {{ form_start(form) }}
+        {{ form(form) }}
+    {{ form_end(form) }}
+
+    <div class="ui-widget">
+    </div>
+
+    <div id="token_file_list" class="row col-sm-12"></div>
+
+    <div id="dialog" title="{{ 'titles.search_information_dialog'|trans({}, 'titles') }}">
+    </div>
+
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+
+    <script type="text/javascript">
+        var Base64 = {
+
+            // private property
+            _keyStr : "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=",
+
+            // public method for encoding
+            encode : function (input) {
+                var output = "";
+                var chr1, chr2, chr3, enc1, enc2, enc3, enc4;
+                var i = 0;
+
+                input = Base64._utf8_encode(input);
+
+                while (i < input.length) {
+
+                    chr1 = input.charCodeAt(i++);
+                    chr2 = input.charCodeAt(i++);
+                    chr3 = input.charCodeAt(i++);
+
+                    enc1 = chr1 >> 2;
+                    enc2 = ((chr1 & 3) << 4) | (chr2 >> 4);
+                    enc3 = ((chr2 & 15) << 2) | (chr3 >> 6);
+                    enc4 = chr3 & 63;
+
+                    if (isNaN(chr2)) {
+                        enc3 = enc4 = 64;
+                    } else if (isNaN(chr3)) {
+                        enc4 = 64;
+                    }
+
+                    output = output +
+                        this._keyStr.charAt(enc1) + this._keyStr.charAt(enc2) +
+                        this._keyStr.charAt(enc3) + this._keyStr.charAt(enc4);
+
+                }
+
+                return output;
+            },
+
+            // public method for decoding
+            decode : function (input) {
+                var output = "";
+                var chr1, chr2, chr3;
+                var enc1, enc2, enc3, enc4;
+                var i = 0;
+
+                input = input.replace(/[^A-Za-z0-9\+\/\=]/g, "");
+
+                while (i < input.length) {
+
+                    enc1 = this._keyStr.indexOf(input.charAt(i++));
+                    enc2 = this._keyStr.indexOf(input.charAt(i++));
+                    enc3 = this._keyStr.indexOf(input.charAt(i++));
+                    enc4 = this._keyStr.indexOf(input.charAt(i++));
+
+                    chr1 = (enc1 << 2) | (enc2 >> 4);
+                    chr2 = ((enc2 & 15) << 4) | (enc3 >> 2);
+                    chr3 = ((enc3 & 3) << 6) | enc4;
+
+                    output = output + String.fromCharCode(chr1);
+
+                    if (enc3 != 64) {
+                        output = output + String.fromCharCode(chr2);
+                    }
+                    if (enc4 != 64) {
+                        output = output + String.fromCharCode(chr3);
+                    }
+
+                }
+
+                output = Base64._utf8_decode(output);
+
+                return output;
+
+            },
+
+            // private method for UTF-8 encoding
+            _utf8_encode : function (string) {
+                if(string)
+                {
+                    string = string.replace(/\r\n/g,"\n");
+                    var utftext = "";
+
+                    for (var n = 0; n < string.length; n++) {
+
+                        var c = string.charCodeAt(n);
+
+                        if (c < 128) {
+                            utftext += String.fromCharCode(c);
+                        }
+                        else if((c > 127) && (c < 2048)) {
+                            utftext += String.fromCharCode((c >> 6) | 192);
+                            utftext += String.fromCharCode((c & 63) | 128);
+                        }
+                        else {
+                            utftext += String.fromCharCode((c >> 12) | 224);
+                            utftext += String.fromCharCode(((c >> 6) & 63) | 128);
+                            utftext += String.fromCharCode((c & 63) | 128);
+                        }
+
+                    }
+
+                    return utftext;
+                }
+                return false;
+            },
+
+            // private method for UTF-8 decoding
+            _utf8_decode : function (utftext) {
+                var string = "";
+                var i = 0;
+                var c = c1 = c2 = 0;
+
+                while ( i < utftext.length ) {
+
+                    c = utftext.charCodeAt(i);
+
+                    if (c < 128) {
+                        string += String.fromCharCode(c);
+                        i++;
+                    }
+                    else if((c > 191) && (c < 224)) {
+                        c2 = utftext.charCodeAt(i+1);
+                        string += String.fromCharCode(((c & 31) << 6) | (c2 & 63));
+                        i += 2;
+                    }
+                    else {
+                        c2 = utftext.charCodeAt(i+1);
+                        c3 = utftext.charCodeAt(i+2);
+                        string += String.fromCharCode(((c & 15) << 12) | ((c2 & 63) << 6) | (c3 & 63));
+                        i += 3;
+                    }
+
+                }
+
+                return string;
+            }
+        };
+
+        var searchLocation = 0;
+
+        $(document).ready(function() {
+            var tokenValues = [];
+
+            $("form").submit(function(event) {
+                event.preventDefault();
+                showNoFormSendingNeededDialog();
+            });
+
+            $(document).ready(function() {
+                $(window).keydown(function(event){
+                    if(13 === event.keyCode) {
+                        event.preventDefault();
+                        showNoFormSendingNeededDialog();
+                        return false;
+                    }
+                });
+            });
+
+            function showNoFormSendingNeededDialog() {
+                $("#dialog")
+                    .html('{{ 'messages.search_text_prevent_form_submit'|trans({}, 'messages') }}')
+                    .dialog();
+            }
+
+            function triggerAutoComplete() {
+                $('#searching_searchToken').autocomplete("search");
+            }
+
+            $('#searching_searchInTokens').change(function() {
+                refreshSearchLocation(this);
+                triggerAutoComplete();
+            });
+
+            $('#searching_searchInTranslations').change(function() {
+                refreshSearchLocation(this);
+                triggerAutoComplete();
+            });
+
+            $('#searching_searchType').change(function() {
+                triggerAutoComplete();
+            });
+
+            /**
+             * refresh search location var corresponding on current status of checkboxes
+             *
+             * @param target
+             */
+            function refreshSearchLocation(target) {
+                if ($(target).is(':checked')) {
+                    searchLocation = searchLocation ? searchLocation | $(target).val() : $(target).val();
+                } else {
+                    searchLocation = searchLocation ? searchLocation & ~$(target).val() : $(target).val();
+                }
+            }
+
+            $("#searching_searchToken").autocomplete({
+                source: function(request, response) {
+                    $("#searching_searchToken").addClass('loading');
+                    $('#token_file_list').html('');
+
+                    var $this = $(this);
+                    var $element = $(this.element);
+                    var previousRequest = $element.data( "jqXHR" );
+
+                    if( previousRequest ) {
+                        previousRequest.abort();
+                    }
+                    $element.data( "jqXHR", $.ajax({
+                        url: '/{{ app.request.getLocale() }}/get-search-proposals/',
+                        type: 'POST',
+                        dataType: "json",
+                        data: {
+                            searchString : request.term,
+                            searchType : $('#searching_searchType').val(),
+                            searchLocation : searchLocation
+                        },
+                        success: function(jsonResponse) {
+                            $("#searching_searchToken").removeClass('loading');
+                            tokenValues = [];
+                            var json = JSON.parse(jsonResponse);
+                            if (0 < json.hits) {
+                                response($.map(json.matches, function (value, key) {
+                                    tokenValues[key] = value;
+                                    return {
+                                        label: key,
+                                        value: key
+                                    };
+                                }));
+                            } else {
+                                $("#dialog")
+                                    .html('{{ 'messages.no_results_found_for_search'|trans({}, 'messages') }}')
+                                    .dialog();
+                            }
+                        }
+                    }));
+                },
+                select: function(target, ui) {
+                    var fileContainer = $('#token_file_list');
+                    fileContainer.html('');
+                    var urlCollection = collectUrls(ui.item.label);
+
+                    for (var key in urlCollection) {
+                        var data = urlCollection[key];
+                        var statusClass = "translation-untouched";
+                        var title = "{{ 'titles.untouched'|trans({}, 'titles') }}";
+
+                        if (undefined !== data.attributes['created']) {
+                            statusClass = "translation-touched";
+                            title = "{{ 'titles.touched'|trans({}, 'titles') }}";
+                        }
+                        if (undefined !== data.attributes['modified']) {
+                            statusClass = "translation-today-touched";
+                            title = "{{ 'titles.touched_date'|trans({}, 'titles') }}".replace(/%date%/, data.attributes['modified']);
+                        }
+
+                        if (urlCollection[data.baseFileName+'_en']
+                            && urlCollection[data.baseFileName+'_en'].attributes
+                            && urlCollection[data.baseFileName+'_en'].attributes['translation']
+                            && data.attributes['translation'] === urlCollection[data.baseFileName+'_en'].attributes['translation']
+                        ) {
+                            statusClass = "translation-same";
+                            title = "{{ 'titles.same_like_source'|trans({}, 'titles') }}";
+                        }
+                        var tag = $('<div class="row col-sm-10">' +
+                            '<span >' + data.fileName + '</span><span class="'+statusClass+
+                                ' translation-state" data-toggle="tooltip" title="'+title+'"></span>'+
+                                '<a target="_blank" href="'+data.url+
+                                '" style="margin-left: 15px;">Edit</a>' +
+                            '</div>'
+                        );
+                        fileContainer.append(tag);
+                    }
+                    $('[data-toggle="tooltip"]').tooltip();
+                },
+                minLength: 3,
+                delay: 300
+            });
+
+            /**
+             * collect all known urls for given label
+             *
+             * @param label
+             *
+             * @returns {Array}
+             */
+            function collectUrls(label) {
+                var urlCollection = [];
+
+                for (var fileName in tokenValues[label]) {
+                    var currentToken = null;
+
+                    if (!tokenValues[label].hasOwnProperty(fileName)) {
+                        continue;
+                    }
+                    currentToken = tokenValues[label][fileName]['__token'];
+                    if (2 === tokenValues[label][fileName]['languages'].length) {
+                        window.open(
+                            url,
+                            '_blank'
+                        );
+                    } else {
+                        for (var locale in tokenValues[label][fileName]['languages']) {
+                            var toFileName = fileName + '.' + locale + '.xlf';
+                            var fromFileName = fileName + '.en.xlf';
+                            var url = '/{{ app.request.getLocale() }}/translate-overview/' +
+                                '?from=' + fromFileName +
+                                '&exportFileName=' + toFileName +
+                                '&to=' + toFileName +
+                                '&lang=' + locale +
+                                '&action=stats' +
+                                '&sourceLanguage=en' +
+                                '#' + currentToken;
+
+                            urlCollection[fileName+'_'+locale] = {
+                                'baseFileName': fileName,
+                                'fileName': toFileName,
+                                'url': url,
+                                'locale': locale,
+                                'attributes': tokenValues[label][fileName]['attributes'][locale]
+                            };
+                        }
+                    }
+                }
+                return urlCollection;
+            }
+
+            refreshSearchLocation($('#searching_searchInTokens'));
+            refreshSearchLocation($('#searching_searchInTranslations'));
+        });
+    </script>
+{% endblock %}
