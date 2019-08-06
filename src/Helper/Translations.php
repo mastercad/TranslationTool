@@ -330,14 +330,12 @@ class Translations
             $xmlObject->load($file->getPathname());
             $xpath = new DOMXPath($xmlObject);
             $xpath->registerNamespace('xliff', 'urn:oasis:names:tc:xliff:document:1.2');
-//            $xpath->registerNamespace('batt', 'http://translation-tool.byte-artist.de/wsd');
             $xpath->registerNamespace('php', 'http://php.net/xpath');
 
             /** @var DOMElement $transUnit */
             foreach ($xpath->query('//xliff:trans-unit') as $transUnit) {
                 $attributes = $transUnit->attributes;
                 $token = trim($transUnit->getElementsByTagName('source')->item(0)->textContent);
-//                $translation = $this->generateArrayKey($transUnit->getElementsByTagName('target')->item(0)->textContent);
                 $translation = $transUnit->getElementsByTagName('target')->item(0)->textContent;
 
                 if (empty($token)) {
@@ -377,7 +375,8 @@ class Translations
                     if ('extradata' === $name) {
                         $extraDataAttributes = json_decode(base64_decode($attributeNode->value), true);
                     } else {
-                        $tokens['tokens'][$token][$fileName]['attributes'][$language][$attributeNode->name] = $attributeNode->value;
+                        $tokens['tokens'][$token][$fileName]['attributes'][$language][$attributeNode->name] = 
+                            $attributeNode->value;
                     }
                 }
 
@@ -426,7 +425,8 @@ class Translations
                  * @var DOMNamedNodeMap $attributeNode
                  */
                 foreach ($attributes as $name => $attributeNode) {
-                    $tokens['translations'][$translation][$fileName]['attributes'][$language][$attributeNode->name] = $attributeNode->value;
+                    $tokens['translations'][$translation][$fileName]['attributes'][$language][$attributeNode->name] = 
+                        $attributeNode->value;
                 }
             }
             $fileName = $file->getFilename();
@@ -476,15 +476,11 @@ class Translations
 
         file_put_contents(
             $this->translationsDirectory.'/tokens.json',
-//            json_encode($tokens)
             json_encode($tokens, JSON_UNESCAPED_UNICODE)
-//            json_encode(array_map('htmlentities', $tokens))
         );
         file_put_contents(
             $this->translationsDirectory.'/languages.json',
-//            json_encode($languages)
             json_encode($languages, JSON_UNESCAPED_UNICODE)
-//            json_encode(array_map('htmlentities', $languages))
         );
 
         return $this;
@@ -586,8 +582,6 @@ class Translations
 
         return file_put_contents(
             $tokensFilePathName,
-//            json_encode(array_map('htmlentities', static::$tokens))
-//            json_encode(static::$tokens)
             json_encode(static::$tokens, JSON_UNESCAPED_UNICODE)
         );
 

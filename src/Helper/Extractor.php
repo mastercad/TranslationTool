@@ -56,8 +56,11 @@ class Extractor
     public static function extractFileInformation($filePathName): array
     {
         $fileName = basename($filePathName);
+        $regEx = '/(?P<'.static::AREA.'>[a-z0-9_]+)\.'.
+                 '(?P<'.static::LANGUAGE.'>[a-z_]+)\.'.
+                 '(?P<'.static::EXTENSION.'>[a-z0-9]{3,5})$/i';
 
-        if (preg_match('/(?P<'.static::AREA.'>[a-z0-9_]+)\.(?P<'.static::LANGUAGE.'>[a-z_]+)\.(?P<'.static::EXTENSION.'>[a-z0-9]{3,5})$/i', $fileName, $matches)) {
+        if (preg_match($regEx, $fileName, $matches)) {
             return $matches;
         }
 

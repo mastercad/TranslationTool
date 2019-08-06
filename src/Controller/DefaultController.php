@@ -541,6 +541,8 @@ class DefaultController extends AbstractController
     }
 
     /**
+     * Clear Upload Folder from Translation files.
+     *
      * @Route("/{_locale}/clear-translations", name="clear-translations", requirements={"_locale" = "en|de"}, defaults={"_locale" = "de"}))
      * @Route("/{_locale}/clear-translations/")
      * @Route("/clear-translations")
