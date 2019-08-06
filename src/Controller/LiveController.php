@@ -36,7 +36,7 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 
 /**
  * Live controller.
- * 
+ *
  * This Controller makes live translations from single file available.
  *
  * @package    App\Controller
