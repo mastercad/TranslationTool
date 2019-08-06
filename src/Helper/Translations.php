@@ -375,7 +375,7 @@ class Translations
                     if ('extradata' === $name) {
                         $extraDataAttributes = json_decode(base64_decode($attributeNode->value), true);
                     } else {
-                        $tokens['tokens'][$token][$fileName]['attributes'][$language][$attributeNode->name] = 
+                        $tokens['tokens'][$token][$fileName]['attributes'][$language][$attributeNode->name] =
                             $attributeNode->value;
                     }
                 }
@@ -425,7 +425,7 @@ class Translations
                  * @var DOMNamedNodeMap $attributeNode
                  */
                 foreach ($attributes as $name => $attributeNode) {
-                    $tokens['translations'][$translation][$fileName]['attributes'][$language][$attributeNode->name] = 
+                    $tokens['translations'][$translation][$fileName]['attributes'][$language][$attributeNode->name] =
                         $attributeNode->value;
                 }
             }

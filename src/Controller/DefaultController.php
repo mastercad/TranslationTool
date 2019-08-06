@@ -55,7 +55,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\ResponseHeaderBag;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Contracts\Translation\TranslatorInterface;
+use Symfony\Component\Translation\TranslatorInterface;
 use ZipArchive;
 
 /**
@@ -136,7 +136,11 @@ class DefaultController extends AbstractController
     /**
      * Provides possibility to translate already imported translatio files.
      *
-     * @Route("/{_locale}/static", name="static", requirements={"_locale" = "en|de"}, defaults={"_locale" = "de"})
+     * @Route(
+     *  "/{_locale}/static",
+     *  name="static",
+     *  requirements={"_locale" = "en|de"}, defaults={"_locale" = "de"}
+     * )
      * @Route("/{_locale}/static/")
      * @Route("/static")
      *
@@ -213,7 +217,11 @@ class DefaultController extends AbstractController
     /**
      * Provides statistiks about current imported translation files.
      *
-     * @Route("/{_locale}/stats", name="stats", requirements={"_locale" = "en|de"}, defaults={"_locale" = "de"})
+     * @Route(
+     *  "/{_locale}/stats",
+     *  name="stats",
+     *  requirements={"_locale" = "en|de"}, defaults={"_locale" = "de"}
+     * )
      * @Route("/{_locale}/stats/")
      * @Route("/stats")
      *
@@ -258,7 +266,11 @@ class DefaultController extends AbstractController
     /**
      * Show Overview of diff between given from and possible to file and given languages.
      *
-     * @Route("/{_locale}/translate-overview", name="translate-overview", requirements={"_locale" = "en|de"}, defaults={"_locale" = "de"})
+     * @Route(
+     *      "/{_locale}/translate-overview",
+     *      name="translate-overview",
+     *      requirements={"_locale" = "en|de"}, defaults={"_locale" = "de"}
+     * )
      * @Route("/{_locale}/translate-overview/")
      * @Route("/translate-overview")
      *
@@ -309,7 +321,11 @@ class DefaultController extends AbstractController
     }
 
     /**
-     * @Route("/{_locale}/export", name="export", requirements={"_locale" = "en|de"}, defaults={"_locale" = "de"})
+     * @Route(
+     *  "/{_locale}/export",
+     *  name="export",
+     *  requirements={"_locale" = "en|de"}, defaults={"_locale" = "de"}
+     * )
      * @Route("/{_locale}/export/")
      * @Route("/export")
      *
@@ -407,7 +423,11 @@ class DefaultController extends AbstractController
     /**
      * Exports all translations as zip archive.
      *
-     * @Route("/{_locale}/export-translations", name="export-translations", requirements={"_locale" = "en|de"}, defaults={"_locale" = "de"})
+     * @Route(
+     *  "/{_locale}/export-translations",
+     *  name="export-translations",
+     *  requirements={"_locale" = "en|de"}, defaults={"_locale" = "de"}
+     * )
      * @Route("/{_locale}/translations/")
      * @Route("/translations")
      *
@@ -478,7 +498,11 @@ class DefaultController extends AbstractController
     /**
      * Provide possibility to search for translation text or token in uploaded files.
      *
-     * @Route("/{_locale}/search", name="search"), requirements={"_locale" = "en|de"}, defaults={"_locale" = "de"})
+     * @Route(
+     *  "/{_locale}/search",
+     *  name="search"),
+     *  requirements={"_locale" = "en|de"}, defaults={"_locale" = "de"}
+     * )
      * @Route("/{_locale}/search/")
      * @Route("/search")
      *
@@ -514,7 +538,11 @@ class DefaultController extends AbstractController
     /**
      * Provide search proposals by given search string and checked search location.
      *
-     * @Route("/{_locale}/get-search-proposals", name="get-search-proposals", requirements={"_locale" = "en|de"}, defaults={"_locale" = "de"})
+     * @Route(
+     *  "/{_locale}/get-search-proposals",
+     *  name="get-search-proposals",
+     *  requirements={"_locale" = "en|de"}, defaults={"_locale" = "de"}
+     * )
      * @Route("/{_locale}/get-search-proposals/")
      * @Route("/get-search-proposals")
      *
@@ -543,7 +571,11 @@ class DefaultController extends AbstractController
     /**
      * Clear Upload Folder from Translation files.
      *
-     * @Route("/{_locale}/clear-translations", name="clear-translations", requirements={"_locale" = "en|de"}, defaults={"_locale" = "de"}))
+     * @Route(
+     *  "/{_locale}/clear-translations",
+     *  name="clear-translations",
+     *  requirements={"_locale" = "en|de"}, defaults={"_locale" = "de"})
+     * )
      * @Route("/{_locale}/clear-translations/")
      * @Route("/clear-translations")
      *
