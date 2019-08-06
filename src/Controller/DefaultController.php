@@ -256,6 +256,8 @@ class DefaultController extends AbstractController
     }
 
     /**
+     * Show Overview of diff between given from and possible to file and given languages.
+     *
      * @Route("/{_locale}/translate-overview", name="translate-overview", requirements={"_locale" = "en|de"}, defaults={"_locale" = "de"})
      * @Route("/{_locale}/translate-overview/")
      * @Route("/translate-overview")
