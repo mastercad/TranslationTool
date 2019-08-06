@@ -72,7 +72,7 @@ class DefaultController extends AbstractController
 {
     /**
      * Index page with instructions and welcome content.
-     * 
+     *
      * @Route("/{_locale}", name="homepage", requirements={"_locale" = "en|de"}, defaults={"_locale" = "de"})
      * @Route("/{_locale}/")
      * @Route("/")
