@@ -85,6 +85,8 @@ class DefaultController extends AbstractController
     }
 
     /**
+     * Provides possibility to import translation files.
+     *
      * @Route("/{_locale}/import", name="import", requirements={"_locale" = "en|de"}, defaults={"_locale" = "de"})
      * @Route("/{_locale}/import")
      * @Route("/import/")
