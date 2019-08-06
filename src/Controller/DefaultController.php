@@ -476,6 +476,8 @@ class DefaultController extends AbstractController
     }
 
     /**
+     * Provide possibility to search for translation text or token in uploaded files.
+     *
      * @Route("/{_locale}/search", name="search"), requirements={"_locale" = "en|de"}, defaults={"_locale" = "de"})
      * @Route("/{_locale}/search/")
      * @Route("/search")
