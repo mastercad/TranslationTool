@@ -20,7 +20,7 @@
  */
 namespace App\Service;
 
-use Symfony\Contracts\Translation\TranslatorInterface;
+use Symfony\Component\Translation\TranslatorInterface;
 
 /**
  * Abstract service for translator service. Should converted to trait.
