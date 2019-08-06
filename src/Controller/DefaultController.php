@@ -599,7 +599,14 @@ class DefaultController extends AbstractController
         $translationService = new Translations($this->getParameter('translations_directory'));
         $matches = $translationService->searchMatchingTranslations($searchString, $searchLocation, $searchType);
 
-        return new JsonResponse(json_encode(['hits' => \count($matches), 'matches' => $matches]));
+        return new JsonResponse(
+            json_encode(
+                [
+                    'hits' => \count($matches),
+                    'matches' => $matches
+                ]
+            )
+        );
     }
 
     /**
