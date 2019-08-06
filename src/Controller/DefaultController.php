@@ -512,6 +512,8 @@ class DefaultController extends AbstractController
     }
 
     /**
+     * Provide search proposals by given search string and checked search location.
+     *
      * @Route("/{_locale}/get-search-proposals", name="get-search-proposals", requirements={"_locale" = "en|de"}, defaults={"_locale" = "de"})
      * @Route("/{_locale}/get-search-proposals/")
      * @Route("/get-search-proposals")
