@@ -1,7 +1,7 @@
 <?php
 /**
  * Live Controller.
- * 
+ *
  * This Controller makes live translation possible.
  *
  * PHP version 7
@@ -22,37 +22,17 @@
  */
 namespace App\Controller;
 
-use App\Entity\Import as ImportEntity;
 use App\Entity\Live as LiveEntity;
-use App\Form\ImportType;
 use App\Form\LiveType;
-use App\Form\SearchingType;
-use App\Form\StaticType;
 use App\Helper\Extractor;
-use App\Helper\Translations;
 use App\Service\File;
-use App\Service\Statistic;
-use App\Service\Xliff\Diff;
-use App\Service\Xliff\Generator;
-use function strlen;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\Filesystem\Exception\FileNotFoundException;
-use Symfony\Component\Finder\SplFileInfo;
-use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
-use Symfony\Component\Form\Extension\Core\Type\HiddenType;
-use Symfony\Component\Form\Extension\Core\Type\SubmitType;
-use Symfony\Component\Form\Form;
-use Symfony\Component\Form\FormBuilder;
 use Symfony\Component\Form\FormError;
-use Symfony\Component\Form\FormTypeInterface;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
-use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpFoundation\ResponseHeaderBag;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Contracts\Translation\TranslatorInterface;
-use ZipArchive;
 
 /**
  * Live controller.
