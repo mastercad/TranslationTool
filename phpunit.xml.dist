@@ -41,4 +41,14 @@
         </testsuite>
     </testsuites>
 
+    <filter>
+        <whitelist>
+            <directory>./</directory>
+            <exclude>
+                <directory>./vendor</directory>
+                <directory>./tests</directory>
+                <directory>./translations</directory>
+            </exclude>
+        </whitelist>
+    </filter>
 </phpunit>
