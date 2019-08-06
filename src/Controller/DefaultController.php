@@ -211,6 +211,8 @@ class DefaultController extends AbstractController
     }
 
     /**
+     * Provides statistiks about current imported translation files.
+     *
      * @Route("/{_locale}/stats", name="stats", requirements={"_locale" = "en|de"}, defaults={"_locale" = "de"})
      * @Route("/{_locale}/stats/")
      * @Route("/stats")
