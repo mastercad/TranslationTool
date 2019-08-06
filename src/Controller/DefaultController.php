@@ -363,12 +363,12 @@ class DefaultController extends AbstractController
                 && $value['translation_orig'] !== $value['translation']
             ) {
                 $attributes['modified'] = date('Y-m-d H:i:s');
-                $attributes['modifier'] = $this->getCurrentUser();
+                $attributes['modifier'] = $this->getUser();
             }
 
             if (!isset($attributes['created'])) {
                 $attributes['created'] = date('Y-m-d H:i:s');
-                $attributes['creator'] = $this->getCurrentUser();
+                $attributes['creator'] = $this->getUser();
             }
             $value['attributes'] = $attributes;
             $translationsService->updateToken($value, $exportFileName);
@@ -568,7 +568,7 @@ class DefaultController extends AbstractController
     }
 
     /**
-     * generate form.
+     * Generate translation overview form.
      *
      * @param $sourceFilePathName
      * @param $translationFilePathName
@@ -639,15 +639,5 @@ class DefaultController extends AbstractController
         );
 
         return $formBuilder->getForm();
-    }
-
-    /**
-     * Get the current logged-in user id, because no authentication exists, the result is currently every time 1.
-     *
-     * @return int
-     */
-    private function getCurrentUser(): int
-    {
-        return 1;
     }
 }
