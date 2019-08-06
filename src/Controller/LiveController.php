@@ -32,7 +32,7 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Contracts\Translation\TranslatorInterface;
+use Symfony\Component\Translation\TranslatorInterface;
 
 /**
  * Live controller.
@@ -49,7 +49,12 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 class LiveController extends AbstractController
 {
     /**
-     * @Route("/{_locale}/live", name="new-translation", requirements={"_locale" = "en|de"}, defaults={"_locale" = "de"})
+     * @Route(
+     *  "/{_locale}/live",
+     *  name="new-translation",
+     *  requirements={"_locale" = "en|de"},
+     *  defaults={"_locale" = "de"}
+     * )
      * @Route("/{_locale}/live")
      * @Route("/live/")
      *
@@ -117,7 +122,9 @@ class LiveController extends AbstractController
                         'from' => $liveEntity->getSourceFileName(),
                         'exportFileName' => $exportFileName,
                         'to' => $translationFileName,
-                        'sourceLanguage' => Extractor::extractLanguageFromFileName($sourceFile->getClientOriginalName()),
+                        'sourceLanguage' => Extractor::extractLanguageFromFileName(
+                            $sourceFile->getClientOriginalName()
+                        ),
                         'lang' => $translationLanguage,
                     ]
                 )
