@@ -405,7 +405,7 @@ class DefaultController extends AbstractController
     }
 
     /**
-     * exports all translations as zip archive.
+     * Exports all translations as zip archive.
      *
      * @Route("/{_locale}/export-translations", name="export-translations", requirements={"_locale" = "en|de"}, defaults={"_locale" = "de"})
      * @Route("/{_locale}/translations/")
