@@ -134,6 +134,8 @@ class DefaultController extends AbstractController
     }
 
     /**
+     * Provides possibility to translate already imported translatio files.
+     *
      * @Route("/{_locale}/static", name="static", requirements={"_locale" = "en|de"}, defaults={"_locale" = "de"})
      * @Route("/{_locale}/static/")
      * @Route("/static")
