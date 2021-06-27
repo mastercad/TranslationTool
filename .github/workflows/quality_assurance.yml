@@ -94,7 +94,9 @@ jobs:
 ##        args: # optional
 
     - name: prepare php-cs-fixer config
-      run: cp .php-cs-fixer.dist.php .php-cs-fixer.php
+      run: |
+        cp .php-cs-fixer.dist.php .php-cs-fixer.php
+        cp .php_cs.dist .php_cs
 
     - name: PHP Code Style Fixer (php-cs-fixer)
       uses: StephaneBour/actions-php-cs-fixer@8.0-v3
