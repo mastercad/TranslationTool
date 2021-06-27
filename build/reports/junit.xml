@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites>
+  <testsuite name="" tests="34" assertions="109" errors="0" warnings="0" failures="0" skipped="0" time="0.873038">
+    <testsuite name="Translation Tool Test Suite" tests="34" assertions="109" errors="0" warnings="0" failures="0" skipped="0" time="0.873038">
+      <testsuite name="Tests\Controller\DefaultControllerTest" file="/app/tests/Controller/DefaultControllerTest.php" tests="19" assertions="77" errors="0" warnings="0" failures="0" skipped="0" time="0.859706">
+        <testcase name="testIndex" class="Tests\Controller\DefaultControllerTest" classname="Tests.Controller.DefaultControllerTest" file="/app/tests/Controller/DefaultControllerTest.php" line="43" assertions="2" time="0.161889"/>
+        <testcase name="testLiveAction" class="Tests\Controller\DefaultControllerTest" classname="Tests.Controller.DefaultControllerTest" file="/app/tests/Controller/DefaultControllerTest.php" line="52" assertions="4" time="0.084875"/>
+        <testcase name="testLiveActionWithSelection" class="Tests\Controller\DefaultControllerTest" classname="Tests.Controller.DefaultControllerTest" file="/app/tests/Controller/DefaultControllerTest.php" line="62" assertions="6" time="0.080243"/>
+        <testcase name="testLiveActionWithoutSelectionFail" class="Tests\Controller\DefaultControllerTest" classname="Tests.Controller.DefaultControllerTest" file="/app/tests/Controller/DefaultControllerTest.php" line="101" assertions="6" time="0.078729"/>
+        <testcase name="testLiveActionWithoutSelectionInGermanFail" class="Tests\Controller\DefaultControllerTest" classname="Tests.Controller.DefaultControllerTest" file="/app/tests/Controller/DefaultControllerTest.php" line="127" assertions="6" time="0.084448"/>
+        <testcase name="testImportAction" class="Tests\Controller\DefaultControllerTest" classname="Tests.Controller.DefaultControllerTest" file="/app/tests/Controller/DefaultControllerTest.php" line="153" assertions="4" time="0.037457"/>
+        <testcase name="testImportActionWithInvalidFile" class="Tests\Controller\DefaultControllerTest" classname="Tests.Controller.DefaultControllerTest" file="/app/tests/Controller/DefaultControllerTest.php" line="196" assertions="3" time="0.037950"/>
+        <testcase name="testStaticActionWithoutSelection" class="Tests\Controller\DefaultControllerTest" classname="Tests.Controller.DefaultControllerTest" file="/app/tests/Controller/DefaultControllerTest.php" line="219" assertions="3" time="0.039896"/>
+        <testcase name="testStaticAction" class="Tests\Controller\DefaultControllerTest" classname="Tests.Controller.DefaultControllerTest" file="/app/tests/Controller/DefaultControllerTest.php" line="235" assertions="9" time="0.077369"/>
+        <testcase name="testTranslateOverviewAction" class="Tests\Controller\DefaultControllerTest" classname="Tests.Controller.DefaultControllerTest" file="/app/tests/Controller/DefaultControllerTest.php" line="292" assertions="2" time="0.056155"/>
+        <testcase name="testTranslateOverviewActionWithMissingFile" class="Tests\Controller\DefaultControllerTest" classname="Tests.Controller.DefaultControllerTest" file="/app/tests/Controller/DefaultControllerTest.php" line="326" assertions="3" time="0.011065"/>
+        <testcase name="testTranslateOverviewActionFromUpload" class="Tests\Controller\DefaultControllerTest" classname="Tests.Controller.DefaultControllerTest" file="/app/tests/Controller/DefaultControllerTest.php" line="361" assertions="5" time="0.044170"/>
+        <testcase name="testExportWithoutOverwrite" class="Tests\Controller\DefaultControllerTest" classname="Tests.Controller.DefaultControllerTest" file="/app/tests/Controller/DefaultControllerTest.php" line="400" assertions="2" time="0.007193"/>
+        <testcase name="testExportWithOverwrite" class="Tests\Controller\DefaultControllerTest" classname="Tests.Controller.DefaultControllerTest" file="/app/tests/Controller/DefaultControllerTest.php" line="452" assertions="5" time="0.008360"/>
+        <testcase name="testExportTranslationsAction" class="Tests\Controller\DefaultControllerTest" classname="Tests.Controller.DefaultControllerTest" file="/app/tests/Controller/DefaultControllerTest.php" line="512" assertions="4" time="0.017510"/>
+        <testcase name="testExportWithoutFiles" class="Tests\Controller\DefaultControllerTest" classname="Tests.Controller.DefaultControllerTest" file="/app/tests/Controller/DefaultControllerTest.php" line="556" assertions="3" time="0.007950"/>
+        <testcase name="testClearTranslationsActionWithFiles" class="Tests\Controller\DefaultControllerTest" classname="Tests.Controller.DefaultControllerTest" file="/app/tests/Controller/DefaultControllerTest.php" line="572" assertions="4" time="0.008521"/>
+        <testcase name="testClearTranslationsActionWithoutFiles" class="Tests\Controller\DefaultControllerTest" classname="Tests.Controller.DefaultControllerTest" file="/app/tests/Controller/DefaultControllerTest.php" line="609" assertions="3" time="0.007638"/>
+        <testcase name="testClearTranslationsActionWithoutDirectory" class="Tests\Controller\DefaultControllerTest" classname="Tests.Controller.DefaultControllerTest" file="/app/tests/Controller/DefaultControllerTest.php" line="625" assertions="3" time="0.008286"/>
+      </testsuite>
+      <testsuite name="Tests\AppBundle\Service\FileTest" file="/app/tests/Service/FileTest.php" tests="7" assertions="13" errors="0" warnings="0" failures="0" skipped="0" time="0.004719">
+        <testcase name="testRmDirRecursive" class="Tests\AppBundle\Service\FileTest" classname="Tests.AppBundle.Service.FileTest" file="/app/tests/Service/FileTest.php" line="42" assertions="2" time="0.000962"/>
+        <testcase name="testDirIsEmptyTrue" class="Tests\AppBundle\Service\FileTest" classname="Tests.AppBundle.Service.FileTest" file="/app/tests/Service/FileTest.php" line="61" assertions="2" time="0.000597"/>
+        <testcase name="testDirIsEmptyWithoutDir" class="Tests\AppBundle\Service\FileTest" classname="Tests.AppBundle.Service.FileTest" file="/app/tests/Service/FileTest.php" line="74" assertions="1" time="0.000303"/>
+        <testcase name="testDirWithDottedFileIsEmptyFalse" class="Tests\AppBundle\Service\FileTest" classname="Tests.AppBundle.Service.FileTest" file="/app/tests/Service/FileTest.php" line="82" assertions="2" time="0.000492"/>
+        <testcase name="testDirWithRegularFileIsEmptyFalse" class="Tests\AppBundle\Service\FileTest" classname="Tests.AppBundle.Service.FileTest" file="/app/tests/Service/FileTest.php" line="98" assertions="2" time="0.000624"/>
+        <testcase name="testDirWithDottedFileIsEmptyTrue" class="Tests\AppBundle\Service\FileTest" classname="Tests.AppBundle.Service.FileTest" file="/app/tests/Service/FileTest.php" line="114" assertions="2" time="0.000587"/>
+        <testcase name="testSearchCurrentTranslationFiles" class="Tests\AppBundle\Service\FileTest" classname="Tests.AppBundle.Service.FileTest" file="/app/tests/Service/FileTest.php" line="127" assertions="2" time="0.001154"/>
+      </testsuite>
+      <testsuite name="Tests\AppBundle\Service\StatisticTest" file="/app/tests/Service/StatisticTest.php" tests="1" assertions="3" errors="0" warnings="0" failures="0" skipped="0" time="0.004276">
+        <testcase name="testStatisticGeneration" class="Tests\AppBundle\Service\StatisticTest" classname="Tests.AppBundle.Service.StatisticTest" file="/app/tests/Service/StatisticTest.php" line="44" assertions="3" time="0.004276"/>
+      </testsuite>
+      <testsuite name="Tests\AppBundle\Service\Xliff\DiffTest" file="/app/tests/Service/Xliff/DiffTest.php" tests="5" assertions="14" errors="0" warnings="0" failures="0" skipped="0" time="0.003812">
+        <testcase name="testDiffWithMissingAndSameTranslations" class="Tests\AppBundle\Service\Xliff\DiffTest" classname="Tests.AppBundle.Service.Xliff.DiffTest" file="/app/tests/Service/Xliff/DiffTest.php" line="55" assertions="4" time="0.000544"/>
+        <testcase name="testDiffWithMissingAndEmptyAndSameTranslations" class="Tests\AppBundle\Service\Xliff\DiffTest" classname="Tests.AppBundle.Service.Xliff.DiffTest" file="/app/tests/Service/Xliff/DiffTest.php" line="68" assertions="4" time="0.000454"/>
+        <testcase name="testDiffWithMissingSourceFile" class="Tests\AppBundle\Service\Xliff\DiffTest" classname="Tests.AppBundle.Service.Xliff.DiffTest" file="/app/tests/Service/Xliff/DiffTest.php" line="81" assertions="2" time="0.001276"/>
+        <testcase name="testDiffWithMissingTranslationFile" class="Tests\AppBundle\Service\Xliff\DiffTest" classname="Tests.AppBundle.Service.Xliff.DiffTest" file="/app/tests/Service/Xliff/DiffTest.php" line="92" assertions="2" time="0.000598"/>
+        <testcase name="testDiffWithMissingTranslationFileInOtherLanguage" class="Tests\AppBundle\Service\Xliff\DiffTest" classname="Tests.AppBundle.Service.Xliff.DiffTest" file="/app/tests/Service/Xliff/DiffTest.php" line="103" assertions="2" time="0.000942"/>
+      </testsuite>
+      <testsuite name="Tests\AppBundle\Service\Xliff\GeneratorTest" file="/app/tests/Service/Xliff/GeneratorTest.php" tests="2" assertions="2" errors="0" warnings="0" failures="0" skipped="0" time="0.000525">
+        <testcase name="testGenerateXML" class="Tests\AppBundle\Service\Xliff\GeneratorTest" classname="Tests.AppBundle.Service.Xliff.GeneratorTest" file="/app/tests/Service/Xliff/GeneratorTest.php" line="45" assertions="1" time="0.000342"/>
+        <testcase name="testGenerateXmlWithEmptyContent" class="Tests\AppBundle\Service\Xliff\GeneratorTest" classname="Tests.AppBundle.Service.Xliff.GeneratorTest" file="/app/tests/Service/Xliff/GeneratorTest.php" line="89" assertions="1" time="0.000183"/>
+      </testsuite>
+    </testsuite>
+  </testsuite>
+</testsuites>

@@ -1,68 +1,70 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
-<!-- https://phpunit.readthedocs.io/en/latest/configuration.html -->
+<!-- https://phpunit.de/manual/current/en/appendixes.configuration.html -->
 <phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:noNamespaceSchemaLocation="vendor/phpunit/phpunit/phpunit.xsd"
-         backupGlobals="false"
-         colors="true"
-         bootstrap="tests/bootstrap.php"
-         convertDeprecationsToExceptions="false"
->
-    <coverage>
-        <include>
-        <directory>./</directory>
-        </include>
-        <exclude>
-        <directory>vendor</directory>
-        <directory>config</directory>
-        <directory>var</directory>
-        <directory>tests</directory>
-        <directory>translations</directory>
-        <directory>assets</directory>
-        </exclude>
-        <report>
-        <clover outputFile="build/reports/coverage-clover.xml"/>
-        <html outputDirectory="build/reports/coverage" lowUpperBound="35" highLowerBound="70"/>
-        <php outputFile="build/reports/coverage.serialized"/>
-        </report>
-    </coverage>
-    <php>
-        <ini name="error_reporting" value="-1" />
-        <env name="KERNEL_CLASS" value="App\Kernel" />
-        <env name="APP_ENV" value="test" force="true" />
-        <env name="SHELL_VERBOSITY" value="-1" />
-        <env name="SYMFONY_PHPUNIT_REMOVE" value="" />
-        <env name="SYMFONY_PHPUNIT_VERSION" value="9.5" />
-        <env name="SYMFONY_DEPRECATIONS_HELPER" value="weak" />
-    </php>
-
-    <testsuites>
-        <testsuite name="Project Test Suite">
-            <directory>tests</directory>
-        </testsuite>
-    </testsuites>
-
-    <coverage processUncoveredFiles="true">
-        <include>
-            <directory suffix=".php">src</directory>
-        </include>
-    </coverage>
-
-    <listeners>
-        <listener class="Symfony\Bridge\PhpUnit\SymfonyTestsListener" />
-    </listeners>
-
-    <logging>
-        <!--        <log type="coverage-text" target="php://stdout" showUncoveredFiles="false"/> -->
-        <junit outputFile="build/reports/junit.xml"/>
-        <testdoxHtml outputFile="build/reports/testdox.html"/>
-        <testdoxText outputFile="build/reports/testdox.txt"/>
-    </logging>
-
-    <!-- Run `composer require symfony/panther` before enabling this extension -->
-    <!--
-    <extensions>
-        <extension class="Symfony\Component\Panther\ServerExtension" />
-    </extensions>
-    -->
+    xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/9.3/phpunit.xsd" 
+    backupGlobals="false" 
+    colors="true"
+    convertErrorsToExceptions="true"
+    convertNoticesToExceptions="true"
+    convertWarningsToExceptions="true"
+    forceCoversAnnotation="false"
+    processIsolation="false"
+    stopOnError="false"
+    stopOnFailure="false"
+    stopOnIncomplete="false"
+    stopOnSkipped="false"
+    stopOnRisky="false"
+    bootstrap="tests/bootstrap.php">
+  <coverage>
+    <include>
+      <directory>./</directory>
+    </include>
+    <exclude>
+      <directory>vendor</directory>
+      <directory>config</directory>
+      <directory>var</directory>
+      <directory>tests</directory>
+      <directory>translations</directory>
+      <directory>assets</directory>
+    </exclude>
+    <report>
+      <clover outputFile="build/reports/coverage-clover.xml"/>
+      <html outputDirectory="build/reports/coverage" lowUpperBound="35" highLowerBound="70"/>
+      <php outputFile="build/reports/coverage.serialized"/>
+    </report>
+  </coverage>
+  <php>
+    <ini name="error_reporting" value="-1"/>
+    <env name="APP_ENV" value="test" force="true"/>
+    <env name="KERNEL_CLASS" value="App\Kernel"/>
+    <env name="SYMFONY_PHPUNIT_REMOVE" value=""/>
+    <env name="SYMFONY_PHPUNIT_VERSION" value="7.5"/>
+    <!-- ###+ symfony/framework-bundle ### -->
+    <env name="APP_SECRET" value="24829f711224a1554cc268d05472cdc7"/>
+    <!-- env name="TRUSTED_PROXIES" value="127.0.0.1,127.0.0.2" -->
+    <!-- env name="TRUSTED_HOSTS" value="'^localhost|example\.com$'" -->
+    <!-- ###- symfony/framework-bundle ### -->
+    <!-- ###+ doctrine/doctrine-bundle ### -->
+    <!-- Format described at https://www.doctrine-project.org/projects/doctrine-dbal/en/latest/reference/configuration.html#connecting-using-a-url -->
+    <!-- For an SQLite database, use: "sqlite:///%kernel.project_dir%/var/data.db" -->
+    <!-- Configure your db driver and server_version in config/packages/doctrine.yaml -->
+    <!-- ###- doctrine/doctrine-bundle ### -->
+    <!-- ###+ symfony/swiftmailer-bundle ### -->
+    <!-- For Gmail as a transport, use: "gmail://username:password@localhost" -->
+    <!-- For a generic SMTP server, use: "smtp://localhost:25?encryption=&auth_mode=" -->
+    <!-- Delivery is disabled by default via "null://localhost" -->
+    <env name="MAILER_URL" value="null://localhost"/>
+    <!-- ###- symfony/swiftmailer-bundle ### -->
+  </php>
+  <testsuites>
+    <testsuite name="Translation Tool Test Suite">
+      <directory>tests/</directory>
+    </testsuite>
+  </testsuites>
+  <logging>
+    <!--        <log type="coverage-text" target="php://stdout" showUncoveredFiles="false"/> -->
+    <junit outputFile="build/reports/junit.xml"/>
+    <testdoxHtml outputFile="build/reports/testdox.html"/>
+    <testdoxText outputFile="build/reports/testdox.txt"/>
+  </logging>
 </phpunit>
