@@ -1,4 +1,8 @@
 {
+    "name": "byte-artist/translation-tool",
+    "description": "translation tool web project",
+    "type": "project",
+    "license": "proprietary",
     "require": {
         "php": "^7.4",
         "ext-dom": "*",
@@ -7,7 +11,7 @@
         "ext-memcached": "*",
         "ext-redis": "*",
         "ext-zip": "*",
-        "composer/package-versions-deprecated": "1.11.99.2",
+        "composer/package-versions-deprecated": "^1.11",
         "doctrine/doctrine-bundle": "^2.4",
         "doctrine/doctrine-migrations-bundle": "^3.1",
         "doctrine/orm": "^2.9",
