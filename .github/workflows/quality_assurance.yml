@@ -49,6 +49,11 @@ jobs:
     - name: PHP Security Checker
       uses: StephaneBour/actions-php-security-checker@1.1
 
+    - name: prepare configs
+      run: |
+        cp .php-cs-fixer.dist.php .php-cs-fixer.php
+        cp .php_cs.dist .php_cs
+
     - name: php-codesniffer
       uses: pipeline-components/php-codesniffer@v0.12.3
       with:
@@ -92,11 +97,6 @@ jobs:
 ##        memory_limit: # optional
 #        # Extra arguments to pass to the phpstan binary
 ##        args: # optional
-
-    - name: prepare php-cs-fixer config
-      run: |
-        cp .php-cs-fixer.dist.php .php-cs-fixer.php
-        cp .php_cs.dist .php_cs
 
     - name: PHP Code Style Fixer (php-cs-fixer)
       uses: StephaneBour/actions-php-cs-fixer@8.0-v3
