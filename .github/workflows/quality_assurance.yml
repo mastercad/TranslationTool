@@ -175,6 +175,7 @@ jobs:
         path: |
           build/reports/junit.xml
           build/reports/coverage-clover.xml
+          var/log/test.log
 
     - name: Publish Unit Test Results
       uses: EnricoMi/publish-unit-test-result-action@v1
