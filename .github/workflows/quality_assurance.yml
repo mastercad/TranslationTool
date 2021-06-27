@@ -65,7 +65,9 @@ jobs:
 #            ${{ runner.os }}-yarn-cache-node-modules-
 
     - name: Install assets
-      run: bin/console assets:install
+      run: |
+        chmod +x bin/console
+        php bin/console assets:install
 
     - name: Yarn install
       uses: borales/actions-yarn@v2.3.0
