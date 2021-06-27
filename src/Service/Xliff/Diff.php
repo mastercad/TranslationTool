@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Service to diff XLIFF files between source and possible translation file.
  *
@@ -10,14 +11,16 @@
  * the PHP License and are unable to obtain it through the web, please
  * send a note to license@php.net so we can mail you a copy immediately.
  *
- * @package    App\Service\Xliff
  * @author     Andreas Kempe <andreas.kempe@byte-artist.de>
  * @copyright  2018-2019 byte-artist
  * @license    http://www.php.net/license/3_01.txt  PHP License 3.01
+ *
  * @version    GIT: $Id$
- * @link       http://pear.php.net/package/PackageName
+ *
+ * @see       http://pear.php.net/package/PackageName
  * @since      File available since Release 1.0.0
  */
+
 namespace App\Service\Xliff;
 
 use App\Service\ServiceAbstract;
@@ -27,11 +30,12 @@ use Symfony\Component\Filesystem\Exception\FileNotFoundException;
 /**
  * Service to diff source and translation file (if exists).
  *
- * @package    App\Service\Xliff
  * @author     Andreas Kempe <andreas.kempe@byte-artist.de>
  * @copyright  2018-2019 byte-artist
  * @license    http://www.php.net/license/3_01.txt  PHP License 3.01
+ *
  * @version    Release: @package_version@
+ *
  * @since      Class available since Release 1.0.0
  */
 class Diff extends ServiceAbstract
@@ -84,8 +88,6 @@ class Diff extends ServiceAbstract
     /**
      * iterates sourceFile and persists founds in sourceData, if translationFilePath is readable, content
      * persists in translationData.
-     *
-     * @return Diff
      */
     public function diff(): Diff
     {
@@ -108,14 +110,14 @@ class Diff extends ServiceAbstract
         */
 
         $sourceData = $this->extendDataWithDOM(
-            $doc->children()->file->body->{"trans-unit"},
+            $doc->children()->file->body->{'trans-unit'},
             $this->getSourceData()
         );
 
         $translationData = $this->getTranslationData();
 
         if (false !== ($doc = $this->readContentFromFile($this->getTranslationFilePathName()))) {
-            $translationElements = $doc->children()->file->body->{"trans-unit"};
+            $translationElements = $doc->children()->file->body->{'trans-unit'};
 
             foreach ($translationElements as $translationElement) {
                 $translationData = $this->processTranslationElement($translationElement, $sourceData, $translationData);
@@ -134,12 +136,6 @@ class Diff extends ServiceAbstract
 
     /**
      * process the given translationElement with the current TranslationData, depends on SourceData.
-     *
-     * @param SimpleXMLElement  $translationElement
-     * @param array       $sourceData
-     * @param array       $translationData
-     *
-     * @return array
      */
     private function processTranslationElement(
         SimpleXMLElement $translationElement,
@@ -205,8 +201,6 @@ class Diff extends ServiceAbstract
      *
      * @param SimpleXMLElement $sourceElements
      * @param array            $sourceData
-     *
-     * @return array
      */
     private function extendDataWithDOM($sourceElements, $sourceData): array
     {
@@ -221,7 +215,7 @@ class Diff extends ServiceAbstract
                 $sourceData[$resName]['source'] = trim($sourceElement->source);
                 $sourceData[$resName]['target'] = trim($sourceElement->target);
             }
-        };
+        }
 
         return $sourceData;
     }
@@ -238,28 +232,19 @@ class Diff extends ServiceAbstract
         if (is_readable($filePathName)) {
             return @simplexml_load_file($filePathName, 'SimpleXMLElement', LIBXML_NOCDATA);
         }
-        throw new FileNotFoundException(
-            $this->getTranslator()->trans(
-                'errors.file_not_found',
-                ['%filename%' => basename($filePathName)],
-                'errors'
-            )
+        $exceptionMessage = $this->getTranslator()->trans(
+            'errors.file_not_found',
+            ['%filename%' => basename($filePathName)],
+            'errors'
         );
+        throw new FileNotFoundException($exceptionMessage);
     }
 
-    /**
-     * @return string
-     */
     public function getSourceFilePathName(): string
     {
         return $this->sourceFilePathName;
     }
 
-    /**
-     * @param string $sourceFilePathName
-     *
-     * @return Diff
-     */
     public function setSourceFilePathName(string $sourceFilePathName): Diff
     {
         $this->sourceFilePathName = $sourceFilePathName;
@@ -267,19 +252,11 @@ class Diff extends ServiceAbstract
         return $this;
     }
 
-    /**
-     * @return string
-     */
     public function getTranslationFilePathName(): string
     {
         return $this->translationFilePathName;
     }
 
-    /**
-     * @param string $translationFilePathName
-     *
-     * @return Diff
-     */
     public function setTranslationFilePathName(string $translationFilePathName): Diff
     {
         $this->translationFilePathName = $translationFilePathName;
@@ -287,19 +264,11 @@ class Diff extends ServiceAbstract
         return $this;
     }
 
-    /**
-     * @return array
-     */
     public function getSourceData(): array
     {
         return $this->sourceData;
     }
 
-    /**
-     * @param array $sourceData
-     *
-     * @return Diff
-     */
     public function setSourceData(array $sourceData): Diff
     {
         $this->sourceData = $sourceData;
@@ -307,19 +276,11 @@ class Diff extends ServiceAbstract
         return $this;
     }
 
-    /**
-     * @return array
-     */
     public function getTranslationData(): array
     {
         return $this->translationData;
     }
 
-    /**
-     * @param array $translationData
-     *
-     * @return Diff
-     */
     public function setTranslationData(array $translationData): Diff
     {
         $this->translationData = $translationData;
@@ -327,25 +288,16 @@ class Diff extends ServiceAbstract
         return $this;
     }
 
-    /**
-     * @return bool
-     */
     public function isRemoveSameContent(): bool
     {
         return $this->removeSameContent;
     }
 
-    /**
-     * @param bool $removeSameContent
-     */
     public function setRemoveSameContent(bool $removeSameContent): void
     {
         $this->removeSameContent = $removeSameContent;
     }
 
-    /**
-     * @return int|null
-     */
     public function getTranslatedCount(): ?int
     {
         return $this->translatedCount;
@@ -359,9 +311,6 @@ class Diff extends ServiceAbstract
         $this->translatedCount = $translatedCount;
     }
 
-    /**
-     * @return int|null
-     */
     public function getEmptyCount(): ?int
     {
         return $this->emptyCount;
@@ -375,9 +324,6 @@ class Diff extends ServiceAbstract
         $this->emptyCount = $emptyCount;
     }
 
-    /**
-     * @return int|null
-     */
     public function getSameCount(): ?int
     {
         return $this->sameCount;
@@ -391,9 +337,6 @@ class Diff extends ServiceAbstract
         $this->sameCount = $sameCount;
     }
 
-    /**
-     * @return int|null
-     */
     public function getItemCount(): ?int
     {
         return $this->itemCount;

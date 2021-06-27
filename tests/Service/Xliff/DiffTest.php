@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Tests for diff service.
  *
@@ -10,14 +11,16 @@
  * the PHP License and are unable to obtain it through the web, please
  * send a note to license@php.net so we can mail you a copy immediately.
  *
- * @package    App\Test\Service\Xliff
  * @author     Andreas Kempe <andreas.kempe@byte-artist.de>
  * @copyright  2018-2019 byte-artist
  * @license    http://www.php.net/license/3_01.txt  PHP License 3.01
+ *
  * @version    GIT: $Id$
- * @link       http://pear.php.net/package/PackageName
+ *
+ * @see       http://pear.php.net/package/PackageName
  * @since      File available since Release 1.0.0
  */
+
 namespace Tests\AppBundle\Service\Xliff;
 
 use App\Service\Xliff\Diff;
@@ -27,11 +30,12 @@ use Symfony\Component\Translation\Translator;
 /**
  * Tests for diff service.
  *
- * @package    App\Test\Service\Xliff
  * @author     Andreas Kempe <andreas.kempe@byte-artist.de>
  * @copyright  2018-2019 byte-artist
  * @license    http://www.php.net/license/3_01.txt  PHP License 3.01
+ *
  * @version    Release: @package_version@
+ *
  * @since      Class available since Release 1.0.0
  */
 class DiffTest extends WebTestCase
@@ -41,7 +45,7 @@ class DiffTest extends WebTestCase
      */
     protected static $translator;
 
-    public static function setUpBeforeClass()
+    public static function setUpBeforeClass(): void
     {
         $kernel = static::createKernel();
         $kernel->boot();
@@ -74,36 +78,33 @@ class DiffTest extends WebTestCase
         $this->assertSame(1, $diffService->getSameCount());
     }
 
-    /**
-     * @expectedException \Symfony\Component\Filesystem\Exception\FileNotFoundException
-     * @expectedExceptionMessage File not_there.xlf not Found!
-     */
     public function testDiffWithMissingSourceFile()
     {
+        $this->expectException(\Symfony\Component\Filesystem\Exception\FileNotFoundException::class);
+        $this->expectExceptionMessage('File not_there.xlf not Found!');
+
         $diffService = new Diff(static::$translator);
         $diffService->setSourceFilePathName(__DIR__.'/files/not_there.xlf')
             ->setTranslationFilePathName(__DIR__.'/files/file_with_missing_trans.de.xlf')
             ->diff();
     }
 
-    /**
-     * @expectedException \Symfony\Component\Filesystem\Exception\FileNotFoundException
-     * @expectedExceptionMessage File translation_not_there.xlf not Found!
-     */
     public function testDiffWithMissingTranslationFile()
     {
+        $this->expectException(\Symfony\Component\Filesystem\Exception\FileNotFoundException::class);
+        $this->expectExceptionMessage('File translation_not_there.xlf not Found!');
+
         $diffService = new Diff(static::$translator);
         $diffService->setSourceFilePathName(__DIR__.'/files/source.en.xlf')
             ->setTranslationFilePathName(__DIR__.'/files/translation_not_there.xlf')
             ->diff();
     }
 
-    /**
-     * @expectedException \Symfony\Component\Filesystem\Exception\FileNotFoundException
-     * @expectedExceptionMessage Datei translation_not_there.xlf nicht gefunden!
-     */
     public function testDiffWithMissingTranslationFileInOtherLanguage()
     {
+        $this->expectException(\Symfony\Component\Filesystem\Exception\FileNotFoundException::class);
+        $this->expectExceptionMessage('Datei translation_not_there.xlf nicht gefunden!');
+
         $translator = clone static::$translator;
         $translator->setLocale('de');
         $diffService = new Diff($translator);

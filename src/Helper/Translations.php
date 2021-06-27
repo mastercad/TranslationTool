@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Static Helper class to extract information from given file.
  *
@@ -10,14 +11,16 @@
  * the PHP License and are unable to obtain it through the web, please
  * send a note to license@php.net so we can mail you a copy immediately.
  *
- * @package    App\Helper
  * @author     Andreas Kempe <andreas.kempe@byte-artist.de>
  * @copyright  2018-2019 byte-artist
  * @license    http://www.php.net/license/3_01.txt  PHP License 3.01
+ *
  * @version    GIT: $Id$
- * @link       http://pear.php.net/package/PackageName
+ *
+ * @see       http://pear.php.net/package/PackageName
  * @since      File available since Release 1.0.0
  */
+
 namespace App\Helper;
 
 use DirectoryIterator;
@@ -32,11 +35,12 @@ use Symfony\Component\Filesystem\Exception\FileNotFoundException;
 /**
  * Helper for translations.
  *
- * @package    App\Helper
  * @author     Andreas Kempe <andreas.kempe@byte-artist.de>
  * @copyright  2018-2019 byte-artist
  * @license    http://www.php.net/license/3_01.txt  PHP License 3.01
+ *
  * @version    Release: @package_version@
+ *
  * @since      Class available since Release 1.0.0
  */
 class Translations
@@ -97,10 +101,8 @@ class Translations
 
     /**
      * returns all available languages, translated in current locale.
-     *
-     * @return array
      */
-    public function availableLanguages(): array
+    public function availableLanguages(): ?array
     {
         $languagesFilePathName = $this->translationsDirectory.'/languages.json';
         $locales = [];
@@ -172,18 +174,16 @@ class Translations
 
     /**
      * initialize service.
-     *
-     * @return bool
      */
     private function init(): bool
     {
         if (false === $this->initialized) {
-            $languageFile = $this->getExternalSourcePath().'/'.$this->currentLocale.'.json';
+            $languageFile = $this->getExternalSourcePath().'/'.$this->currentLocale.'.php';
 
             if (!is_readable($languageFile)) {
-                $languageFile = $this->getExternalSourcePath().'/en.json';
+                $languageFile = $this->getExternalSourcePath().'/en.php';
             }
-            $content = json_decode(file_get_contents($languageFile), true);
+            $content = require $languageFile;
             $this->locales = $content['Names'];
             $this->initialized = true;
         }
@@ -197,8 +197,6 @@ class Translations
      * @param string $searchString
      * @param int    $searchLocation
      * @param string $searchType
-     *
-     * @return array
      */
     public function searchMatchingTranslations(
         $searchString,
@@ -224,8 +222,6 @@ class Translations
      *
      * @param string $searchString
      * @param string $searchType
-     *
-     * @return string
      */
     private function prepareSearchString($searchString, $searchType): string
     {
@@ -249,8 +245,6 @@ class Translations
      *
      * @param $searchString
      * @param $position
-     *
-     * @return array
      */
     private function searchMatchesByString($searchString, $position): array
     {
@@ -280,8 +274,6 @@ class Translations
      * returns translated locale, if known.
      *
      * @param string $locale
-     *
-     * @return string
      */
     public function mapLocaleToLanguage($locale): string
     {
@@ -488,8 +480,6 @@ class Translations
 
     /**
      * @param $string
-     *
-     * @return string
      */
     public function generateArrayKey($string): string
     {
@@ -503,8 +493,6 @@ class Translations
      *
      * @param $data
      * @param $fileName
-     *
-     * @return Translations
      */
     public function updateToken($data, $fileName): Translations
     {
@@ -602,9 +590,6 @@ class Translations
         */
     }
 
-    /**
-     * @return string
-     */
     public function getTranslationsDirectory(): string
     {
         return $this->translationsDirectory;
@@ -612,8 +597,6 @@ class Translations
 
     /**
      * @param string $translationsDirectory
-     *
-     * @return Translations
      */
     public function setTranslationsDirectory($translationsDirectory): Translations
     {
@@ -622,9 +605,6 @@ class Translations
         return $this;
     }
 
-    /**
-     * @return string
-     */
     public function getCurrentLocale(): string
     {
         return $this->currentLocale;
@@ -632,8 +612,6 @@ class Translations
 
     /**
      * @param string $currentLocale
-     *
-     * @return Translations
      */
     public function setCurrentLocale($currentLocale): Translations
     {
@@ -642,19 +620,11 @@ class Translations
         return $this;
     }
 
-    /**
-     * @return string
-     */
     public function getExternalSourcePath(): string
     {
         return $this->externalSourcePath;
     }
 
-    /**
-     * @param string $externalSourcePath
-     *
-     * @return Translations
-     */
     public function setExternalSourcePath(string $externalSourcePath): Translations
     {
         $this->externalSourcePath = $externalSourcePath;

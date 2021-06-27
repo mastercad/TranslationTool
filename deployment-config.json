@@ -1,0 +1,11 @@
+[
+  {
+    "name": "translation tool alfahosting",
+    "ip": "89.22.113.245",
+    "username": "byte-artist",
+    "port": "22",
+    "beforeHooks": "",
+    "afterHooks": "",
+    "path": "/var/www/vhosts/byte-artist.de/xliff.byte-artist.de"
+  }
+]

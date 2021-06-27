@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Form Helper class.
  *
@@ -10,31 +11,34 @@
  * the PHP License and are unable to obtain it through the web, please
  * send a note to license@php.net so we can mail you a copy immediately.
  *
- * @package    App\Helper
  * @author     Andreas Kempe <andreas.kempe@byte-artist.de>
  * @copyright  2018-2019 byte-artist
  * @license    http://www.php.net/license/3_01.txt  PHP License 3.01
+ *
  * @version    GIT: $Id$
- * @link       http://pear.php.net/package/PackageName
+ *
+ * @see       http://pear.php.net/package/PackageName
  * @since      File available since Release 1.0.0
  */
+
 namespace App\Helper;
 
 use App\Service\Xliff\Diff;
 use function count;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\FormType;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilder;
 
 /**
  * Helper for translation form.
  *
- * @package    App\Helper
  * @author     Andreas Kempe <andreas.kempe@byte-artist.de>
  * @copyright  2018-2019 byte-artist
  * @license    http://www.php.net/license/3_01.txt  PHP License 3.01
+ *
  * @version    Release: @package_version@
+ *
  * @since      Class available since Release 1.0.0
  */
 class Form
@@ -42,15 +46,12 @@ class Form
     /**
      * adds given data to given formBuilder.
      *
-     * @param FormBuilder $formBuilder
      * @param $currentKey
      * @param $sourceValue
      * @param $translationValue
      * @param $emptyClass
      * @param array $attributes
      * @param bool  $sourceAndTargetSame
-     *
-     * @return FormBuilder
      */
     public static function addTranslationEntryToForm(
         FormBuilder $formBuilder,
@@ -137,11 +138,6 @@ class Form
 
     /**
      * extends given form builder with given translation and source data from given diff service.
-     *
-     * @param Diff        $diffService
-     * @param FormBuilder $formBuilder
-     *
-     * @return FormBuilder
      */
     public static function extendFormWithSourceAndTranslationData(
         Diff $diffService,

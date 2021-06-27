@@ -15,7 +15,7 @@
     {% set route = app.request.attributes.get('_route') %}
 
         <nav class="navbar fixed-top navbar-expand-lg navbar-light bg-light">
-            <a class="navbar-brand" href="/">Translation Tool</a>
+            <a class="navbar-brand" href="{{ path('index_lang_end') }}">Translation Tool</a>
             <button class="navbar-toggler" type="button"
                     data-toggle="collapse"
                     data-target="#navbarSupportedContent"

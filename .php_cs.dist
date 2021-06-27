@@ -1,8 +1,42 @@
 <?php
 
+/*
+ * This file is part of Translation Tool.
+ *
+ * (c) thinkstep AG (thinkstep.com)
+ */
+
+$header = <<<EOF
+This file is part of Translation Tool.
+
+(c) thinkstep AG (thinkstep.com)
+EOF;
+
+$finder = PhpCsFixer\Finder::create()
+    ->in([__DIR__])
+    ->exclude('bin')
+    ->exclude('build')
+    ->exclude('definitions/disclosure')
+    ->exclude('definitions/schema')
+    ->exclude('help')
+    ->exclude('vendor')
+    ->exclude('workspace')
+    ->notName('saml-autoconfig.php')
+;
+
 return PhpCsFixer\Config::create()
     ->setRules([
         '@Symfony' => true,
+        'simplified_null_return' => false,
         'array_syntax' => ['syntax' => 'short'],
+        'ordered_imports' => true,
+        'header_comment' => ['header' => $header],
+
+        // These fixers would cause too many changes and break the "layout" of many comments.
+        'phpdoc_annotation_without_dot' => false,
+        'hash_to_slash_comment' => false,
+        'no_empty_comment' => false,
     ])
+    ->setFinder($finder)
+    ->setUsingCache(true)
 ;

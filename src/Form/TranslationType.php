@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Form for translation.
  *
@@ -10,14 +11,16 @@
  * the PHP License and are unable to obtain it through the web, please
  * send a note to license@php.net so we can mail you a copy immediately.
  *
- * @package    App\Form
  * @author     Andreas Kempe <andreas.kempe@byte-artist.de>
  * @copyright  2018-2019 byte-artist
  * @license    http://www.php.net/license/3_01.txt  PHP License 3.01
+ *
  * @version    GIT: $Id$
- * @link       http://pear.php.net/package/PackageName
+ *
+ * @see       http://pear.php.net/package/PackageName
  * @since      File available since Release 1.0.0
  */
+
 namespace App\Form;
 
 use App\Helper\Translations;
@@ -38,11 +41,12 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 /**
  * Form for translation.
  *
- * @package    App\Form
  * @author     Andreas Kempe <andreas.kempe@byte-artist.de>
  * @copyright  2018-2019 byte-artist
  * @license    http://www.php.net/license/3_01.txt  PHP License 3.01
+ *
  * @version    Release: @package_version@
+ *
  * @since      Class available since Release 1.0.0
  */
 class TranslationType extends AbstractType
@@ -82,10 +86,6 @@ class TranslationType extends AbstractType
         $this->params = $params;
     }
 
-    /**
-     * @param FormBuilderInterface $builder
-     * @param array                $options
-     */
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder->setMethod('POST');
@@ -124,9 +124,6 @@ class TranslationType extends AbstractType
         ]);
     }
 
-    /**
-     * @param FormEvent $event
-     */
     public function onPresetData(FormEvent $event): void
     {
         $translationEntity = $event->getData();
@@ -189,9 +186,6 @@ class TranslationType extends AbstractType
         }
     }
 
-    /**
-     * @param OptionsResolver $resolver
-     */
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
@@ -200,19 +194,11 @@ class TranslationType extends AbstractType
         ]);
     }
 
-    /**
-     * @return array
-     */
     public function getTranslationData(): array
     {
         return $this->translationData;
     }
 
-    /**
-     * @param array $translationData
-     *
-     * @return TranslationType
-     */
     public function setTranslationData(array $translationData): TranslationType
     {
         $this->translationData = $translationData;
@@ -220,19 +206,11 @@ class TranslationType extends AbstractType
         return $this;
     }
 
-    /**
-     * @return array
-     */
     public function getSourceData(): array
     {
         return $this->sourceData;
     }
 
-    /**
-     * @param array $sourceData
-     *
-     * @return TranslationType
-     */
     public function setSourceData(array $sourceData): TranslationType
     {
         $this->sourceData = $sourceData;
@@ -247,8 +225,6 @@ class TranslationType extends AbstractType
 
     /**
      * @param null $exportFileName
-     *
-     * @return TranslationType
      */
     public function setExportFileName($exportFileName): TranslationType
     {
@@ -264,8 +240,6 @@ class TranslationType extends AbstractType
 
     /**
      * @param null $translationLanguage
-     *
-     * @return TranslationType
      */
     public function setTranslationLanguage($translationLanguage): TranslationType
     {

@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Tests for file service.
  *
@@ -10,14 +11,16 @@
  * the PHP License and are unable to obtain it through the web, please
  * send a note to license@php.net so we can mail you a copy immediately.
  *
- * @package    App\Test\Service
  * @author     Andreas Kempe <andreas.kempe@byte-artist.de>
  * @copyright  2018-2019 byte-artist
  * @license    http://www.php.net/license/3_01.txt  PHP License 3.01
+ *
  * @version    GIT: $Id$
- * @link       http://pear.php.net/package/PackageName
+ *
+ * @see       http://pear.php.net/package/PackageName
  * @since      File available since Release 1.0.0
  */
+
 namespace Tests\AppBundle\Service;
 
 use App\Service\File;
@@ -26,11 +29,12 @@ use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 /**
  * Tests for file service.
  *
- * @package    App\Test\Service
  * @author     Andreas Kempe <andreas.kempe@byte-artist.de>
  * @copyright  2018-2019 byte-artist
  * @license    http://www.php.net/license/3_01.txt  PHP License 3.01
+ *
  * @version    Release: @package_version@
+ *
  * @since      Class available since Release 1.0.0
  */
 class FileTest extends WebTestCase

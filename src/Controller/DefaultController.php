@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Default Controller.
  *
@@ -10,20 +11,20 @@
  * the PHP License and are unable to obtain it through the web, please
  * send a note to license@php.net so we can mail you a copy immediately.
  *
- * @package    App\Controller
  * @author     Andreas Kempe <andreas.kempe@byte-artist.de>
  * @copyright  2018-2019 byte-artist
  * @license    http://www.php.net/license/3_01.txt  PHP License 3.01
+ *
  * @version    GIT: $Id$
- * @link       http://pear.php.net/package/PackageName
+ *
+ * @see       http://pear.php.net/package/PackageName
  * @since      File available since Release 1.0.0
  */
+
 namespace App\Controller;
 
 use App\Entity\Import as ImportEntity;
-use App\Entity\Live as LiveEntity;
 use App\Form\ImportType;
-use App\Form\LiveType;
 use App\Form\SearchingType;
 use App\Form\StaticType;
 use App\Helper\Extractor;
@@ -32,7 +33,6 @@ use App\Service\File;
 use App\Service\Statistic;
 use App\Service\Xliff\Diff;
 use App\Service\Xliff\Generator;
-use function count;
 use Exception;
 use function is_array;
 use RecursiveDirectoryIterator;
@@ -55,17 +55,18 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\ResponseHeaderBag;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Translation\TranslatorInterface;
+use Symfony\Contracts\Translation\TranslatorInterface;
 use ZipArchive;
 
 /**
  * Default controller.
  *
- * @package    App\Controller
  * @author     Andreas Kempe <andreas.kempe@byte-artist.de>
  * @copyright  2018-2019 byte-artist
  * @license    http://www.php.net/license/3_01.txt  PHP License 3.01
+ *
  * @version    Release: @package_version@
+ *
  * @since      Class available since Release 1.0.0
  */
 class DefaultController extends AbstractController
@@ -73,11 +74,9 @@ class DefaultController extends AbstractController
     /**
      * Index page with instructions and welcome content.
      *
-     * @Route("/{_locale}", name="homepage", requirements={"_locale" = "en|de"}, defaults={"_locale" = "de"})
-     * @Route("/{_locale}/")
-     * @Route("/")
-     *
-     * @return Response
+     * @Route("/{_locale}", name="index_lang_end", requirements={"_locale" = "en|de"}, defaults={"_locale" = "de"})
+     * @Route("/{_locale}/", name="index_lang")
+     * @Route("/", name="index")
      */
     public function indexAction(): Response
     {
@@ -90,16 +89,13 @@ class DefaultController extends AbstractController
      * @Route("/{_locale}/import", name="import", requirements={"_locale" = "en|de"}, defaults={"_locale" = "de"})
      * @Route("/{_locale}/import")
      * @Route("/import/")
-     *
-     * @param TranslatorInterface $translator
-     * @param Request             $request
-     *
-     * @return Response
      */
     public function importAction(TranslatorInterface $translator, Request $request): Response
     {
         $importEntity = new ImportEntity();
-        $this->get('session')->set('_locale', $request->get('_locale'));
+
+//        $this->get('session')->set('_locale', $request->get('_locale'));
+        $request->getSession()->set('_locale', $request->get('_locale'));
 
         $form = $this->createForm(ImportType::class, $importEntity, [
             'locale' => $request->get('_locale'),
@@ -143,11 +139,6 @@ class DefaultController extends AbstractController
      * )
      * @Route("/{_locale}/static/")
      * @Route("/static")
-     *
-     * @param TranslatorInterface $translator
-     * @param Request             $request
-     *
-     * @return Response
      */
     public function staticAction(TranslatorInterface $translator, Request $request): Response
     {
@@ -161,7 +152,8 @@ class DefaultController extends AbstractController
             ]);
         }
 
-        $this->get('session')->set('_locale', $request->get('_locale'));
+//        $this->get('session')->set('_locale', $request->get('_locale'));
+        $request->getSession()->set('_locale', $request->get('_locale'));
 
         $form = $this->createForm(StaticType::class, null, [
             'locale' => $request->get('_locale'),
@@ -224,11 +216,6 @@ class DefaultController extends AbstractController
      * )
      * @Route("/{_locale}/stats/")
      * @Route("/stats")
-     *
-     * @param TranslatorInterface $translator
-     * @param Request             $request
-     *
-     * @return Response
      */
     public function statsAction(TranslatorInterface $translator, Request $request): Response
     {
@@ -273,11 +260,6 @@ class DefaultController extends AbstractController
      * )
      * @Route("/{_locale}/translate-overview/")
      * @Route("/translate-overview")
-     *
-     * @param TranslatorInterface $translator
-     * @param Request             $request
-     *
-     * @return Response
      */
     public function translateOverviewAction(TranslatorInterface $translator, Request $request): Response
     {
@@ -329,10 +311,6 @@ class DefaultController extends AbstractController
      * @Route("/{_locale}/export/")
      * @Route("/export")
      *
-     * @param Request $request
-     *
-     * @return Response
-     *
      * @throws Exception
      */
     public function exportAction(Request $request): Response
@@ -354,6 +332,10 @@ class DefaultController extends AbstractController
             && null !== $exportFileName
         ) {
             $translationLanguage = Extractor::extractLanguageFromFileName($exportFileName);
+        }
+
+        if (empty($exportFileName)) {
+            $exportFileName = 'translation_export.xliff';
         }
 
         $translationsService->setCurrentLocale($translationLanguage);
@@ -431,11 +413,7 @@ class DefaultController extends AbstractController
      * @Route("/{_locale}/translations/")
      * @Route("/translations")
      *
-     * @param TranslatorInterface $translator
-     *
      * @throws FileNotFoundException
-     *
-     * @return Response
      */
     public function exportTranslationsAction(TranslatorInterface $translator): Response
     {
@@ -505,16 +483,11 @@ class DefaultController extends AbstractController
      * )
      * @Route("/{_locale}/search/")
      * @Route("/search")
-     *
-     * @param TranslatorInterface $translator
-     * @param Request             $request
-     *
-     * @return Response
      */
     public function searchAction(TranslatorInterface $translator, Request $request): Response
     {
-        $this->get('session')->set('_locale', $request->get('_locale'));
-
+//        $this->get('session')->set('_locale', $request->get('_locale'));
+        $request->getSession()->set('_locale', $request->get('_locale'));
         $form = $this->createForm(SearchingType::class, null);
 
         $translationsDirectory = $this->getParameter('translations_directory');
@@ -545,10 +518,6 @@ class DefaultController extends AbstractController
      * )
      * @Route("/{_locale}/get-search-proposals/")
      * @Route("/get-search-proposals")
-     *
-     * @param Request $request
-     *
-     * @return JsonResponse
      */
     public function getSearchProposalsAction(Request $request): JsonResponse
     {
@@ -562,7 +531,7 @@ class DefaultController extends AbstractController
             json_encode(
                 [
                     'hits' => \count($matches),
-                    'matches' => $matches
+                    'matches' => $matches,
                 ]
             )
         );
@@ -578,10 +547,6 @@ class DefaultController extends AbstractController
      * )
      * @Route("/{_locale}/clear-translations/")
      * @Route("/clear-translations")
-     *
-     * @param TranslatorInterface $translator
-     *
-     * @return Response
      */
     public function clearTranslationsAction(TranslatorInterface $translator): Response
     {

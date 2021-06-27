@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Live Controller.
  *
@@ -12,14 +13,16 @@
  * the PHP License and are unable to obtain it through the web, please
  * send a note to license@php.net so we can mail you a copy immediately.
  *
- * @package    App\Controller
  * @author     Andreas Kempe <andreas.kempe@byte-artist.de>
  * @copyright  2018-2019 byte-artist
  * @license    http://www.php.net/license/3_01.txt  PHP License 3.01
+ *
  * @version    GIT: $Id$
- * @link       http://pear.php.net/package/PackageName
+ *
+ * @see       http://pear.php.net/package/PackageName
  * @since      File available since Release 1.0.0
  */
+
 namespace App\Controller;
 
 use App\Entity\Live as LiveEntity;
@@ -32,18 +35,19 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Translation\TranslatorInterface;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 /**
  * Live controller.
  *
  * This Controller makes live translations from single file available.
  *
- * @package    App\Controller
  * @author     Andreas Kempe <andreas.kempe@byte-artist.de>
  * @copyright  2018-2019 byte-artist
  * @license    http://www.php.net/license/3_01.txt  PHP License 3.01
+ *
  * @version    Release: @package_version@
+ *
  * @since      Class available since Release 1.0.0
  */
 class LiveController extends AbstractController
@@ -57,15 +61,11 @@ class LiveController extends AbstractController
      * )
      * @Route("/{_locale}/live")
      * @Route("/live/")
-     *
-     * @param TranslatorInterface $translator
-     * @param Request             $request
-     *
-     * @return Response
      */
     public function indexAction(TranslatorInterface $translator, Request $request): Response
     {
-        $this->get('session')->set('_locale', $request->get('_locale'));
+//        $this->get('session')->set('_locale', $request->get('_locale'));
+        $request->getSession()->set('_locale', $request->get('_locale'));
 
         $liveEntity = new LiveEntity();
         $form = $this->createForm(LiveType::class, $liveEntity, [
@@ -84,9 +84,9 @@ class LiveController extends AbstractController
             && null === $translationFile
             && null === $translationLanguage
         ) {
-            $form->addError(new FormError(
-                $translated = $translator->trans('errors.nothing_selected', [], 'errors')
-            ));
+            $form->addError(
+                new FormError($translator->trans('errors.nothing_selected', [], 'errors'))
+            );
         } elseif (true === $submitted
             && $form->isValid()
         ) {
@@ -103,7 +103,7 @@ class LiveController extends AbstractController
             $fileInformation = explode('.', $sourceFile->getClientOriginalName());
             $baseFileName = $fileInformation[0];
             $extension = isset($fileInformation[2]) ? $fileInformation[2] : $fileInformation[1];
-            
+
             if (null !== $translationFile) {
                 $exportFileName = $translationFile->getClientOriginalName();
                 $translationFileName = File::moveUniqueUploadedFile(

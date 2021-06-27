@@ -1,0 +1,209 @@
+name: "Quality Assurance"
+
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    branches:
+      - master
+    types: [opened, synchronize, reopened]
+
+jobs:
+  quality-assurance:
+    name: "Quality Assurance"
+    runs-on: ubuntu-latest
+    steps:
+    - name: Setup PHP with PECL extension
+      uses: shivammathur/setup-php@v2
+      with:
+        php-version: '7.4'
+        coverage: xdebug
+        extensions: imagick, swoole, zip, mbstring, xml, ctype, iconv, intl, pdo_sqlite, dom, filter, gd, json, pdo
+
+    - name: Debug output composer version
+      run: composer -v
+
+    - name: Checkout
+      uses: actions/checkout@v2
+      with:
+        fetch-depth: 0
+
+    - name: Validate composer.json and composer.lock
+      run: composer validate --strict
+
+    - name: Prepare environment
+      run: echo 'APP_ENV=dev' > .env.local
+
+    - name: Install dependencies
+      run: composer install --no-interaction --prefer-dist --no-progress
+
+    - name: provide secrets
+      env:
+        SYMFONY_DECRYPTION_SECRET: ${{ secrets.SYMFONY_DECRYPTION_SECRET }}
+      run: php bin/console secrets:decrypt-to-local --force --env=prod
+
+    - name: Check that environment is configured correctly
+      run: php ./bin/requirements-checker
+
+    - name: PHP Security Checker
+      uses: StephaneBour/actions-php-security-checker@1.1
+
+    - name: php-codesniffer
+      uses: pipeline-components/php-codesniffer@v0.12.3
+      with:
+        directory: src
+        # Additional options
+#        options: # optional, default is -s -p --colors --extensions=php
+        # Add a test script to composer.json, for instance: "test": "vendor/bin/phpunit"
+        # Docs: https://getcomposer.org/doc/articles/scripts.md
+
+    # - name: Run test suite
+    #   run: composer run-script test
+
+#    - name: PHPStan (php-actions)
+#      # You may pin to the exact commit or the version.
+#      # uses: php-actions/phpstan@e1ce60d6e66d508e78ddeefac1ec81570b8ef27d
+#      uses: php-actions/phpstan@v2
+#      with:
+#        # What version of PHPStan to use
+##        version: # optional, default is latest
+#        # What version of PHP to use
+##        php_version: # optional, default is latest
+#        # Space separated list of extensions to configure with the PHP build
+##        php_extensions: # optional
+#        # The command to run (analyse [default], clear-result-cache, dump-deps, help, list, worker)
+#        command: analyse
+#        # Path(s) with source code to run analysis on
+#        path: src
+#        # Configuration file location
+##        configuration: # optional
+#        # Level of rule options - the higher, the stricter
+##        level: # optional
+#        # Path to a file with a list of paths to run analysis on
+##        paths_file: # optional
+#        # Project's additional autoload file path
+##        autoload_file: # optional
+#        # Format in which to print the result of the analysis
+##        error_format: # optional
+#        # Path to a file where the baseline should be saved
+##        generate_baseline: # optional
+#        # Memory limit for analysis
+##        memory_limit: # optional
+#        # Extra arguments to pass to the phpstan binary
+##        args: # optional
+
+    - name: prepare php-cs-fixer config
+      run: cp .php-cs-fixer.dist.php .php-cs-fixer.php
+
+    - name: PHP Code Style Fixer (php-cs-fixer)
+      uses: StephaneBour/actions-php-cs-fixer@8.0-v3
+      with:
+        # Folder to check code style
+        dir: src
+
+    - name: output bin content for debug
+      run: ls -lisa ./bin/
+
+    - name: PHPUnit
+#      uses: chindit/actions-phpunit-symfony@1.0.0
+#      uses: php-actions/phpunit@v2
+#      with:
+#        version: 7.5
+#        configuration: ./phpunit.xml.dist
+#        memory_limit: 256M
+#        php_extensions: xdebug
+      run: ./bin/phpunit
+
+#    - name: Test Reporter
+#      uses: dorny/test-reporter@v1.4.3
+#      with:
+#        # Name or regex of artifact containing test results
+##        artifact: # optional
+#        # Name of the check run
+#        name: phpunit test results
+#        # Coma separated list of paths to test results
+#
+##        Supports wildcards via [fast-glob](https://github.com/mrmlnc/fast-glob)
+##        All matched result files must be of same format
+#
+#        path: ./build/reports/junit.xml
+#          # Format of test results. Supported options:
+##          - dart-json
+##          - dotnet-trx
+##          - flutter-json
+##          - java-junit
+##          - jest-junit
+##          - mocha-json
+#
+#        reporter: all
+#          # Limits which test suites are listed. Supported options:
+##          - all
+##          - only-failed
+#
+#        list-suites: all # default is all
+#          # Limits which test cases are listed. Supported options:
+##        - all
+##        - only-failed
+##        - none
+#
+#        list-tests: all # default is all
+#        # Limits number of created annotations with error message and stack trace captured during test execution.
+#        # Must be less or equal to 50.
+#        max-annotations: 10 # default is 10
+#        # Set this action as failed if test report contain any failed test
+#        fail-on-error: true # default is true
+#        # Relative path under $GITHUB_WORKSPACE where the repository was checked out
+#        working-directory: . # optional
+#        # GitHub Access Token
+#        token: ${{ github.token }} # optional, default is ${{ github.token }}
+
+    - name: Cleanup Report Results
+      shell: bash
+      run: |
+         sed -i 's/\(.*file="\).*TranslationTool\/\(.*"\)/\1\2/g' build/reports/junit.xml
+         sed -i 's/\(.*name="\).*TranslationTool\/\(.*"\)/\1\2/g' build/reports/coverage-clover.xml
+
+    - name: Upload Unit Test Results
+      if: always()
+      uses: actions/upload-artifact@v2
+      with:
+        name: Unit Test Results
+        path: |
+          build/reports/junit.xml
+          build/reports/coverage-clover.xml
+
+    - name: Publish Unit Test Results
+      uses: EnricoMi/publish-unit-test-result-action@v1
+      if: always()
+      with:
+        files: build/reports/junit.xml
+        github_token: ${{ github.token }}
+
+    - name: output reports content for debug
+      run: ls -lisa ./build/reports/
+
+    - name: SonarCloud Scan
+      uses: SonarSource/sonarcloud-github-action@master
+      env:
+        SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      # You may pin to the exact commit or the version.
+      # uses: SonarSource/sonarcloud-github-action@de2e56b42aa84d0b1c5b622644ac17e505c9a049
+#      with:
+        # Additional arguments to the sonarcloud scanner
+#        args: # optional
+        # Set the sonar.projectBaseDir analysis property
+#        projectBaseDir: # optional, default is .
+
+#    - name: tag-version
+#      # You may pin to the exact commit or the version.
+#      # uses: juliansangillo/tag-version@0ca10cb901a4e3273715c4443e5dec5ad8f40328
+#      uses: juliansangillo/tag-version@v1.5
+#      with:
+#        # The branch to use for stable releases in production. Default is master
+#        production-branch: main # optional, default is master
+#        # The branch to use for test deployments. Default is test
+#        test-branch: test # optional, default is test
+#        # The branch to use for dev deployments. Default is develop
+#        dev-branch: development # optional, default is develop

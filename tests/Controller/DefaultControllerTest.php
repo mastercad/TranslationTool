@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Default Controller tests.
  *
@@ -10,14 +11,16 @@
  * the PHP License and are unable to obtain it through the web, please
  * send a note to license@php.net so we can mail you a copy immediately.
  *
- * @package    App\Test\Controller
  * @author     Andreas Kempe <andreas.kempe@byte-artist.de>
  * @copyright  2018-2019 byte-artist
  * @license    http://www.php.net/license/3_01.txt  PHP License 3.01
+ *
  * @version    GIT: $Id$
- * @link       http://pear.php.net/package/PackageName
+ *
+ * @see       http://pear.php.net/package/PackageName
  * @since      File available since Release 1.0.0
  */
+
 namespace Tests\Controller;
 
 use App\Service\File;
@@ -27,11 +30,12 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
 /**
  * Default controller tests.
  *
- * @package    App\Test\Controller
  * @author     Andreas Kempe <andreas.kempe@byte-artist.de>
  * @copyright  2018-2019 byte-artist
  * @license    http://www.php.net/license/3_01.txt  PHP License 3.01
+ *
  * @version    Release: @package_version@
+ *
  * @since      Class available since Release 1.0.0
  */
 class DefaultControllerTest extends WebTestCase
@@ -42,7 +46,7 @@ class DefaultControllerTest extends WebTestCase
         $crawler = $client->request('GET', '/en');
 
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
-        $this->assertContains('Translation Tool', $crawler->filter('.row h1')->text());
+        $this->assertStringContainsString('Translation Tool', $crawler->filter('.row h1')->text());
     }
 
     public function testLiveAction(): void
@@ -88,7 +92,7 @@ class DefaultControllerTest extends WebTestCase
         $this->assertFileExists($uploadDirectory.'/'.$redirectInformation['to']);
 
         $this->assertEquals(302, $client->getResponse()->getStatusCode());
-        $this->assertContains(
+        $this->assertStringContainsString(
             'Redirecting to /en/translate-overview?from',
             $crawler->text()
         );
@@ -113,7 +117,7 @@ class DefaultControllerTest extends WebTestCase
         $this->assertNotEmpty($crawler->filter('input#live_sourceFile'));
         $this->assertNotEmpty($crawler->filter('input#live_translationFile'));
         $this->assertNotEmpty($crawler->filter('select#live_translationLanguage'));
-        $this->assertContains(
+        $this->assertStringContainsString(
             'Please select a TranslationFile or Select a TranslationLanguage!',
             $crawler->filter('.alert-danger')->text()
         );
@@ -139,7 +143,7 @@ class DefaultControllerTest extends WebTestCase
         $this->assertNotEmpty($crawler->filter('input#live_sourceFile'));
         $this->assertNotEmpty($crawler->filter('input#live_translationFile'));
         $this->assertNotEmpty($crawler->filter('select#live_translationLanguage'));
-        $this->assertContains(
+        $this->assertStringContainsString(
             'Bitte wählen sie eine Übersetzungsdatei oder eine Sprache, in die übersetzt werden soll, aus!',
             $crawler->filter('.alert-danger')->text()
         );
@@ -185,7 +189,7 @@ class DefaultControllerTest extends WebTestCase
 
         $result = array_diff(array_flip($expectations), array_flip($files));
         $this->assertSame(0, count($result));
-        $this->assertContains('Translation file import successfully!', $crawler->text());
+        $this->assertStringContainsString('Translation file import successfully!', $crawler->text());
         $this->assertFalse($client->getResponse()->isRedirect('/en/translate-overview'));
     }
 
@@ -205,7 +209,7 @@ class DefaultControllerTest extends WebTestCase
         $crawler = $client->submit($form);
 
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
-        $this->assertContains(
+        $this->assertStringContainsString(
             'The mime type of the file is invalid ("text/xml"). Allowed mime types are "application/zip", "zip".',
             $crawler->filter('.alert-danger')->text()
         );
@@ -221,7 +225,7 @@ class DefaultControllerTest extends WebTestCase
         $crawler = $client->submit($form);
 
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
-        $this->assertContains(
+        $this->assertStringContainsString(
             'Please select Source Language, Translation Language and the File what you want to Translate!',
             $crawler->filter('.alert-danger')->text()
         );
@@ -272,12 +276,16 @@ class DefaultControllerTest extends WebTestCase
         $this->assertEquals('source.de.xlf', $redirectInformation['exportFileName']);
         $this->assertEquals('stats', $redirectInformation['action']);
 
-        $this->assertContains(
-            'Redirecting to /en/translate-overview?from=source.en.xlf&exportFileName=source.de.xlf&to=source.de.xlf&lang=de&sourceLanguage=en&action=stats',
+        $this->assertStringContainsString(
+            'Redirecting to /en/translate-overview?from=source.en.xlf&exportFileName=source.de.xlf&to=source.de.xlf&'.
+                'lang=de&sourceLanguage=en&action=stats',
             $crawler->text()
         );
         $this->assertTrue(
-            $client->getResponse()->isRedirect('/en/translate-overview?from=source.en.xlf&exportFileName=source.de.xlf&to=source.de.xlf&lang=de&sourceLanguage=en&action=stats')
+            $client->getResponse()->isRedirect(
+                '/en/translate-overview?from=source.en.xlf&exportFileName=source.de.xlf'.
+                    '&to=source.de.xlf&lang=de&sourceLanguage=en&action=stats'
+            )
         );
     }
 
@@ -308,7 +316,8 @@ class DefaultControllerTest extends WebTestCase
         );
         $client->request(
             'GET',
-            '/en/translate-overview?from=source.en.xlf&exportFileName=source.de.xlf&to=source.de.xlf&lang=de&sourceLanguage=en&&action=stats'
+            '/en/translate-overview?from=source.en.xlf&exportFileName=source.de.xlf&to=source.de.xlf&lang=de&'.
+                'sourceLanguage=en&&action=stats'
         );
 
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
@@ -341,11 +350,12 @@ class DefaultControllerTest extends WebTestCase
         );
         $crawler = $client->request(
             'GET',
-            '/en/translate-overview?from=das_ist_ein_test.test&exportFileName=source.de.xlf&to=source.de.xlf&lang=de&sourceLanguage=en&action=stats'
+            '/en/translate-overview?from=das_ist_ein_test.test&exportFileName=source.de.xlf&to=source.de.xlf&'.
+                'lang=de&sourceLanguage=en&action=stats'
         );
 
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
-        $this->assertContains('File das_ist_ein_test.test not Found!', $crawler->text());
+        $this->assertStringContainsString('File das_ist_ein_test.test not Found!', $crawler->text());
     }
 
     public function testTranslateOverviewActionFromUpload(): void
@@ -355,6 +365,8 @@ class DefaultControllerTest extends WebTestCase
 
         if (file_exists($uploadDirectory)) {
             $this->assertTrue(File::cleanDir($uploadDirectory));
+        } else {
+            mkdir($uploadDirectory, 0777, true);
         }
 
         copy(
@@ -375,7 +387,8 @@ class DefaultControllerTest extends WebTestCase
         );
         $crawler = $client->request(
             'GET',
-            '/en/translate-overview?from=source_upload.en.xlf&exportFileName=source_upload.de.xlf&to=source_upload.de.xlf&sourceLanguage=en&lang=de'
+            '/en/translate-overview?from=source_upload.en.xlf&exportFileName=source_upload.de.xlf&'.
+                'to=source_upload.de.xlf&sourceLanguage=en&lang=de'
         );
 
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
@@ -401,13 +414,13 @@ class DefaultControllerTest extends WebTestCase
                         'attributes' => json_encode($attributes),
                     ],
                     'key2' => [
-                        'translation' => 'was vor dem test tag<tag>testeintrag für den test des escapings</tag>bisschen was dahinter!',
+                        'translation' => 'was vor dem test tag<tag>testeintrag für den test des escapings</tag>'.
+                            'bisschen was dahinter!',
                         'attributes' => json_encode($attributes),
                     ],
                     'overwrite_translation_file' => false,
                 ],
-            ]
-        );
+            ]);
 
         $extraDataString = base64_encode(json_encode($attributes));
 
@@ -415,7 +428,8 @@ class DefaultControllerTest extends WebTestCase
 <xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
   <file datatype="plaintext" original="file.ext" source-language="en" target-language="de">
     <header>
-      <tool tool-company="byte-artist" tool-id="byte-artist-xliff-translation-tool" tool-name="byte-artist Xliff Translation Tool"/>
+      <tool tool-company="byte-artist" tool-id="byte-artist-xliff-translation-tool" '.
+        'tool-name="byte-artist Xliff Translation Tool"/>
     </header>
     <body>
       <trans-unit extradata="'.$extraDataString.'" id="c2add694bf942dc77b376592d9c862cd" resname="key1">
@@ -424,7 +438,8 @@ class DefaultControllerTest extends WebTestCase
       </trans-unit>
       <trans-unit extradata="'.$extraDataString.'" id="78f825aaa0103319aaa1a30bf4fe3ada" resname="key2">
         <source>key2</source>
-        <target>was vor dem test tag&lt;tag&gt;testeintrag f&#xfc;r den test des escapings&lt;/tag&gt;bisschen was dahinter!</target>
+        <target>was vor dem test tag&lt;tag&gt;testeintrag f&#xfc;r den test des escapings&lt;/tag&gt;bisschen '.
+            'was dahinter!</target>
       </trans-unit>
     </body>
   </file>
@@ -455,20 +470,21 @@ class DefaultControllerTest extends WebTestCase
                         'attributes' => json_encode($attributes),
                     ],
                     'key2' => [
-                        'translation' => 'was vor dem test tag<tag>testeintrag für den test des escapings</tag>bisschen was dahinter!',
+                        'translation' => 'was vor dem test tag<tag>testeintrag für den test des escapings</tag>'.
+                            'bisschen was dahinter!',
                         'attributes' => json_encode($attributes),
                     ],
                     'overwrite_translation_file' => true,
                 ],
-            ]
-        );
+            ]);
         $extraDataString = base64_encode(json_encode($attributes));
 
         $expectation = '<?xml version="1.0"?>
 <xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
   <file datatype="plaintext" original="file.ext" source-language="en" target-language="de">
     <header>
-      <tool tool-company="byte-artist" tool-id="byte-artist-xliff-translation-tool" tool-name="byte-artist Xliff Translation Tool"/>
+      <tool tool-company="byte-artist" tool-id="byte-artist-xliff-translation-tool" tool-name="byte-artist Xliff '.
+        'Translation Tool"/>
     </header>
     <body>
       <trans-unit extradata="'.$extraDataString.'" id="c2add694bf942dc77b376592d9c862cd" resname="key1">
@@ -477,16 +493,20 @@ class DefaultControllerTest extends WebTestCase
       </trans-unit>
       <trans-unit extradata="'.$extraDataString.'" id="78f825aaa0103319aaa1a30bf4fe3ada" resname="key2">
         <source>key2</source>
-        <target>was vor dem test tag&lt;tag&gt;testeintrag f&#xfc;r den test des escapings&lt;/tag&gt;bisschen was dahinter!</target>
+        <target>was vor dem test tag&lt;tag&gt;testeintrag f&#xfc;r den test des escapings&lt;/tag&gt;bisschen was '.
+            'dahinter!</target>
       </trans-unit>
     </body>
   </file>
 </xliff>';
 
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
-        $this->assertContains('Translation saved', $client->getResponse()->getContent());
+        $this->assertStringContainsString('Translation saved', $client->getResponse()->getContent());
         $this->assertTrue(is_readable($translationsDirectory.'/test_export.de.xlf'));
-        $this->assertXmlStringEqualsXmlString($expectation, file_get_contents($translationsDirectory.'/test_export.de.xlf'));
+        $this->assertXmlStringEqualsXmlString(
+            $expectation,
+            file_get_contents($translationsDirectory.'/test_export.de.xlf')
+        );
     }
 
     public function testExportTranslationsAction()
@@ -496,6 +516,10 @@ class DefaultControllerTest extends WebTestCase
 
         if (file_exists($translationsDirectory)) {
             $this->assertTrue(File::cleanDir($translationsDirectory));
+        }
+
+        if (!file_exists($translationsDirectory)) {
+            mkdir($translationsDirectory, 0777, true);
         }
 
         copy(
@@ -516,13 +540,17 @@ class DefaultControllerTest extends WebTestCase
         );
         $crawler = $client->request(
             'GET',
-            '/en/translate-overview?from=das_ist_ein_test.test&exportFileName=source.de.xlf&to=source.de.xlf&sourceLanguage=en&lang=de&action=stats'
+            '/en/translate-overview?from=das_ist_ein_test.test&exportFileName=source.de.xlf&to=source.de.xlf&'.
+                'sourceLanguage=en&lang=de&action=stats'
         );
 
         $client->request('GET', '/en/export-translations');
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
         $this->assertEquals('application/zip', $client->getResponse()->headers->get('content-type'));
-        $this->assertEquals('attachment; filename=translations.zip', $client->getResponse()->headers->get('content-disposition'));
+        $this->assertEquals(
+            'attachment; filename=translations.zip',
+            $client->getResponse()->headers->get('content-disposition')
+        );
     }
 
     public function testExportWithoutFiles()
@@ -535,7 +563,7 @@ class DefaultControllerTest extends WebTestCase
         }
         $client->request('GET', '/en/export-translations');
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
-        $this->assertContains(
+        $this->assertStringContainsString(
             'Please import first Translation File Archive to use this Functionality!',
             $client->getResponse()->getContent()
         );
@@ -548,6 +576,10 @@ class DefaultControllerTest extends WebTestCase
 
         if (file_exists($translationsDirectory)) {
             $this->assertTrue(File::cleanDir($translationsDirectory));
+        }
+
+        if (!file_exists($translationsDirectory)) {
+            mkdir($translationsDirectory, 0777, true);
         }
 
         copy(
@@ -571,7 +603,7 @@ class DefaultControllerTest extends WebTestCase
 
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
         $this->assertFalse(file_exists($translationsDirectory));
-        $this->assertContains('Translations successfully deleted', $client->getResponse()->getContent());
+        $this->assertStringContainsString('Translations successfully deleted', $client->getResponse()->getContent());
     }
 
     public function testClearTranslationsActionWithoutFiles()
@@ -587,7 +619,7 @@ class DefaultControllerTest extends WebTestCase
 
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
         $this->assertFalse(file_exists($translationsDirectory));
-        $this->assertContains('Translations successfully deleted', $client->getResponse()->getContent());
+        $this->assertStringContainsString('Translations successfully deleted', $client->getResponse()->getContent());
     }
 
     public function testClearTranslationsActionWithoutDirectory()
@@ -603,7 +635,7 @@ class DefaultControllerTest extends WebTestCase
 
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
         $this->assertFalse(file_exists($translationsDirectory));
-        $this->assertContains('Translations successfully deleted', $client->getResponse()->getContent());
+        $this->assertStringContainsString('Translations successfully deleted', $client->getResponse()->getContent());
     }
 
     /**

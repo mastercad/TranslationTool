@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Service to generate statistics for translation files.
  *
@@ -10,14 +11,16 @@
  * the PHP License and are unable to obtain it through the web, please
  * send a note to license@php.net so we can mail you a copy immediately.
  *
- * @package    App\Service
  * @author     Andreas Kempe <andreas.kempe@byte-artist.de>
  * @copyright  2018-2019 byte-artist
  * @license    http://www.php.net/license/3_01.txt  PHP License 3.01
+ *
  * @version    GIT: $Id$
- * @link       http://pear.php.net/package/PackageName
+ *
+ * @see       http://pear.php.net/package/PackageName
  * @since      File available since Release 1.0.0
  */
+
 namespace App\Service;
 
 use App\Service\Xliff\Diff;
@@ -25,11 +28,12 @@ use App\Service\Xliff\Diff;
 /**
  * Service to generate statistics for translation files.
  *
- * @package    App\Service
  * @author     Andreas Kempe <andreas.kempe@byte-artist.de>
  * @copyright  2018-2019 byte-artist
  * @license    http://www.php.net/license/3_01.txt  PHP License 3.01
+ *
  * @version    Release: @package_version@
+ *
  * @since      Class available since Release 1.0.0
  */
 class Statistic extends ServiceAbstract
@@ -64,8 +68,6 @@ class Statistic extends ServiceAbstract
 
     /**
      * generates statistic collection.
-     *
-     * @return array
      */
     public function generate(): array
     {
@@ -109,9 +111,6 @@ class Statistic extends ServiceAbstract
         return $statsCollection;
     }
 
-    /**
-     * @return string|null
-     */
     public function getTranslationsDirectory(): ?string
     {
         return $this->translationsDirectory;
@@ -119,8 +118,6 @@ class Statistic extends ServiceAbstract
 
     /**
      * @param string|null $translationsDirectory
-     *
-     * @return Statistic
      */
     public function setTranslationsDirectory($translationsDirectory): Statistic
     {
@@ -129,9 +126,6 @@ class Statistic extends ServiceAbstract
         return $this;
     }
 
-    /**
-     * @return string|null
-     */
     public function getTranslationLanguage(): ?string
     {
         return $this->translationLanguage;
@@ -139,8 +133,6 @@ class Statistic extends ServiceAbstract
 
     /**
      * @param string|null $translationLanguage
-     *
-     * @return Statistic
      */
     public function setTranslationLanguage($translationLanguage): Statistic
     {
@@ -149,9 +141,6 @@ class Statistic extends ServiceAbstract
         return $this;
     }
 
-    /**
-     * @return string|null
-     */
     public function getSourceLanguage(): ?string
     {
         return $this->sourceLanguage;
@@ -159,8 +148,6 @@ class Statistic extends ServiceAbstract
 
     /**
      * @param string|null $sourceLanguage
-     *
-     * @return Statistic
      */
     public function setSourceLanguage($sourceLanguage): Statistic
     {
@@ -169,9 +156,6 @@ class Statistic extends ServiceAbstract
         return $this;
     }
 
-    /**
-     * @return array|null
-     */
     public function getSourceFiles(): ?array
     {
         return $this->sourceFiles;
@@ -179,8 +163,6 @@ class Statistic extends ServiceAbstract
 
     /**
      * @param array|null $sourceFiles
-     *
-     * @return Statistic
      */
     public function setSourceFiles($sourceFiles): Statistic
     {

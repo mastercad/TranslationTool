@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Generator for creating and extending XLIFF files from array.
  *
@@ -10,14 +11,16 @@
  * the PHP License and are unable to obtain it through the web, please
  * send a note to license@php.net so we can mail you a copy immediately.
  *
- * @package    App\Service\Xliff
  * @author     Andreas Kempe <andreas.kempe@byte-artist.de>
  * @copyright  2018-2019 byte-artist
  * @license    http://www.php.net/license/3_01.txt  PHP License 3.01
+ *
  * @version    GIT: $Id$
- * @link       http://pear.php.net/package/PackageName
+ *
+ * @see       http://pear.php.net/package/PackageName
  * @since      File available since Release 1.0.0
  */
+
 namespace App\Service\Xliff;
 
 use DOMDocument;
@@ -27,11 +30,12 @@ use function is_array;
 /**
  * Service to diff source and translation file (if exists).
  *
- * @package    App\Service\Xliff
  * @author     Andreas Kempe <andreas.kempe@byte-artist.de>
  * @copyright  2018-2019 byte-artist
  * @license    http://www.php.net/license/3_01.txt  PHP License 3.01
+ *
  * @version    Release: @package_version@
+ *
  * @since      Class available since Release 1.0.0
  */
 class Generator
@@ -124,8 +128,6 @@ class Generator
      *
      * @param string $key
      * @param array  $value
-     *
-     * @return Generator
      */
     public function addTransUnit($key, $value): Generator
     {
@@ -154,8 +156,6 @@ class Generator
      *
      * @param string $tagName
      * @param string $value
-     *
-     * @return DOMElement
      */
     private function createElement($tagName, $value): DOMElement
     {
@@ -173,8 +173,6 @@ class Generator
      * Checks, if given String needs CDATA element for escaping.
      *
      * @param string $value
-     *
-     * @return bool
      */
     private function checkCdataRequired($value): bool
     {
@@ -188,7 +186,6 @@ class Generator
     /**
      * Extends given DOMElement with given attributes and values from $element.
      *
-     * @param DOMElement  $transUnit
      * @param array|string $element
      *
      * @return mixed
@@ -238,8 +235,6 @@ class Generator
      * Extends given Attribute with possible Namespace.
      *
      * @param string $attribute
-     *
-     * @return string
      */
     private function extendAttributeWithNamespace($attribute): string
     {
@@ -255,8 +250,6 @@ class Generator
      *
      * @param string $key
      * @param string $value
-     *
-     * @return bool
      */
     public function replaceTransUnit($key, $value): bool
     {
@@ -266,8 +259,6 @@ class Generator
 
     /**
      * finalize prepared content for xml content output.
-     *
-     * @return Generator
      */
     public function finishContent(): Generator
     {
@@ -282,19 +273,11 @@ class Generator
         return $this->setContent($this->useXmlDocument()->saveXML());
     }
 
-    /**
-     * @return string
-     */
     public function getHeader(): string
     {
         return $this->header;
     }
 
-    /**
-     * @param string $header
-     *
-     * @return Generator
-     */
     public function setHeader(string $header): Generator
     {
         $this->header = $header;
@@ -302,9 +285,6 @@ class Generator
         return $this;
     }
 
-    /**
-     * @return string
-     */
     public function getContent(): string
     {
         return $this->content;
@@ -312,8 +292,6 @@ class Generator
 
     /**
      * @param string $content
-     *
-     * @return Generator
      */
     public function setContent($content): Generator
     {
@@ -322,19 +300,11 @@ class Generator
         return $this;
     }
 
-    /**
-     * @return string
-     */
     public function getFooter(): string
     {
         return $this->footer;
     }
 
-    /**
-     * @param string $footer
-     *
-     * @return Generator
-     */
     public function setFooter(string $footer): Generator
     {
         $this->footer = $footer;
@@ -342,19 +312,11 @@ class Generator
         return $this;
     }
 
-    /**
-     * @return string
-     */
     public function getTranslationLanguage(): string
     {
         return $this->translationLanguage;
     }
 
-    /**
-     * @param string $translationLanguage
-     *
-     * @return Generator
-     */
     public function setTranslationLanguage(string $translationLanguage): Generator
     {
         $this->translationLanguage = $translationLanguage;
@@ -362,9 +324,6 @@ class Generator
         return $this;
     }
 
-    /**
-     * @return DOMDocument|null
-     */
     public function getXmlDocument(): ?DOMDocument
     {
         return $this->xmlDocument;
@@ -372,8 +331,6 @@ class Generator
 
     /**
      * @param DOMDocument|null $xmlDocument
-     *
-     * @return Generator
      */
     public function setXmlDocument(DOMDocument $xmlDocument): Generator
     {
@@ -382,9 +339,6 @@ class Generator
         return $this;
     }
 
-    /**
-     * @return DOMDocument|null
-     */
     public function useXmlDocument(): ?DOMDocument
     {
         if (!$this->getXmlDocument() instanceof DOMDocument) {
@@ -394,9 +348,6 @@ class Generator
         return $this->getXmlDocument();
     }
 
-    /**
-     * @return DOMElement|null
-     */
     public function getXmlRoot(): ?DOMElement
     {
         return $this->xmlRoot;
@@ -404,8 +355,6 @@ class Generator
 
     /**
      * @param DOMElement|null $xmlRoot
-     *
-     * @return Generator
      */
     public function setXmlRoot(DOMElement $xmlRoot): Generator
     {
@@ -414,9 +363,6 @@ class Generator
         return $this;
     }
 
-    /**
-     * @return DOMElement
-     */
     public function useXmlRoot(): DOMElement
     {
         if (!$this->getXmlRoot() instanceof DOMElement) {
@@ -430,19 +376,11 @@ class Generator
         return $this->getXmlRoot();
     }
 
-    /**
-     * @return DOMElement|null
-     */
     public function getXmlFile(): ?DOMElement
     {
         return $this->xmlFile;
     }
 
-    /**
-     * @param DOMElement $xmlFile
-     *
-     * @return Generator
-     */
     public function setXmlFile(DOMElement $xmlFile): Generator
     {
         $this->xmlFile = $xmlFile;
@@ -450,9 +388,6 @@ class Generator
         return $this;
     }
 
-    /**
-     * @return DOMElement
-     */
     public function useXmlFile(): DOMElement
     {
         if (!$this->getXmlFile() instanceof DOMElement) {
@@ -472,19 +407,11 @@ class Generator
         return $this->getXmlFile();
     }
 
-    /**
-     * @return DOMElement|null
-     */
     public function getXmlHeader(): ?DOMElement
     {
         return $this->xmlHeader;
     }
 
-    /**
-     * @param DOMElement $xmlHeader
-     *
-     * @return Generator
-     */
     public function setXmlHeader(DOMElement $xmlHeader): Generator
     {
         $this->xmlHeader = $xmlHeader;
@@ -492,9 +419,6 @@ class Generator
         return $this;
     }
 
-    /**
-     * @return DOMElement
-     */
     public function useXmlHeader(): DOMElement
     {
         if (!$this->getXmlHeader() instanceof DOMElement) {
@@ -510,19 +434,11 @@ class Generator
         return $this->getXmlHeader();
     }
 
-    /**
-     * @return DOMElement|null
-     */
     public function getXmlBody(): ?DOMElement
     {
         return $this->xmlBody;
     }
 
-    /**
-     * @param DOMElement $xmlBody
-     *
-     * @return Generator
-     */
     public function setXmlBody(DOMElement $xmlBody): Generator
     {
         $this->xmlBody = $xmlBody;
@@ -550,8 +466,6 @@ class Generator
 
     /**
      * @param null $sourceFileName
-     *
-     * @return Generator
      */
     public function setSourceFileName($sourceFileName): Generator
     {
@@ -560,19 +474,11 @@ class Generator
         return $this;
     }
 
-    /**
-     * @return bool
-     */
     public function isApplyHashFromTokenAsId(): bool
     {
         return $this->applyHashFromTokenAsId;
     }
 
-    /**
-     * @param bool $applyHashFromTokenAsId
-     *
-     * @return Generator
-     */
     public function setApplyHashFromTokenAsId(bool $applyHashFromTokenAsId): Generator
     {
         $this->applyHashFromTokenAsId = $applyHashFromTokenAsId;
@@ -580,19 +486,11 @@ class Generator
         return $this;
     }
 
-    /**
-     * @return bool
-     */
     public function isApplyTokenAsResName(): bool
     {
         return $this->applyTokenAsResName;
     }
 
-    /**
-     * @param bool $applyTokenAsResName
-     *
-     * @return Generator
-     */
     public function setApplyTokenAsResName(bool $applyTokenAsResName): Generator
     {
         $this->applyTokenAsResName = $applyTokenAsResName;

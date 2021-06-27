@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Tests for generator service.
  *
@@ -10,14 +11,16 @@
  * the PHP License and are unable to obtain it through the web, please
  * send a note to license@php.net so we can mail you a copy immediately.
  *
- * @package    App\Test\Service\Xliff
  * @author     Andreas Kempe <andreas.kempe@byte-artist.de>
  * @copyright  2018-2019 byte-artist
  * @license    http://www.php.net/license/3_01.txt  PHP License 3.01
+ *
  * @version    GIT: $Id$
- * @link       http://pear.php.net/package/PackageName
+ *
+ * @see       http://pear.php.net/package/PackageName
  * @since      File available since Release 1.0.0
  */
+
 namespace Tests\AppBundle\Service\Xliff;
 
 use App\Service\Xliff\Generator;
@@ -26,11 +29,12 @@ use PHPUnit\Framework\TestCase;
 /**
  * Tests for generator service.
  *
- * @package    App\Test\Service\Xliff
  * @author     Andreas Kempe <andreas.kempe@byte-artist.de>
  * @copyright  2018-2019 byte-artist
  * @license    http://www.php.net/license/3_01.txt  PHP License 3.01
+ *
  * @version    Release: @package_version@
+ *
  * @since      Class available since Release 1.0.0
  */
 class GeneratorTest extends TestCase
@@ -48,9 +52,10 @@ class GeneratorTest extends TestCase
             ->setTranslationLanguage('en')
             ->addTransUnit('key1', ['translation' => 'value1'])
             ->addTransUnit(
-                'key2', 
+                'key2',
                 [
-                    'translation' => 'was vor dem test tag<tag>testeintrag für den test des escapings</tag>bisschen was dahinter!',
+                    'translation' => 'was vor dem test tag<tag>testeintrag für den test des escapings</tag>bisschen '.
+                        'was dahinter!',
                 ]
             )->finishContent();
 
@@ -58,16 +63,18 @@ class GeneratorTest extends TestCase
 <xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
     <file source-language="en" target-language="en" datatype="plaintext" original="file.ext">
         <header>
-            <tool tool-company="byte-artist" tool-id="byte-artist-xliff-translation-tool" tool-name="byte-artist Xliff Translation Tool"/>
+            <tool tool-company="byte-artist" tool-id="byte-artist-xliff-translation-tool" tool-name="byte-artist '.
+                'Xliff Translation Tool"/>
         </header>
         <body>
             <trans-unit id="c2add694bf942dc77b376592d9c862cd" resname="key1">
-               <source>key1</source>
-               <target>value1</target>
+                <source>key1</source>
+                <target>value1</target>
             </trans-unit>
             <trans-unit id="78f825aaa0103319aaa1a30bf4fe3ada" resname="key2">
-               <source>key2</source>
-               <target><![CDATA[was vor dem test tag<tag>testeintrag für den test des escapings</tag>bisschen was dahinter!]]></target>
+                <source>key2</source>
+                <target><![CDATA[was vor dem test tag<tag>testeintrag für den test des escapings</tag>bisschen '.
+                    'was dahinter!]]></target>
             </trans-unit>
        </body>
     </file>
@@ -90,7 +97,8 @@ class GeneratorTest extends TestCase
 <xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
     <file source-language="en" target-language="" datatype="plaintext" original="file.ext">
         <header>
-            <tool tool-company="byte-artist" tool-id="byte-artist-xliff-translation-tool" tool-name="byte-artist Xliff Translation Tool"/>
+            <tool tool-company="byte-artist" tool-id="byte-artist-xliff-translation-tool" tool-name="byte-artist '.
+                'Xliff Translation Tool"/>
         </header>
         <body/>
     </file>

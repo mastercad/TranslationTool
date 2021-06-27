@@ -3,3 +3,7 @@ controllers:
     type: annotation
     requirements:
       _locale: "%allowed_locales%"
+
+kernel:
+    resource: ../../src/Kernel.php
+    type: annotation

@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Entity for live translations.
  *
@@ -10,14 +11,16 @@
  * the PHP License and are unable to obtain it through the web, please
  * send a note to license@php.net so we can mail you a copy immediately.
  *
- * @package    App\Entity
  * @author     Andreas Kempe <andreas.kempe@byte-artist.de>
  * @copyright  2018-2019 byte-artist
  * @license    http://www.php.net/license/3_01.txt  PHP License 3.01
+ *
  * @version    GIT: $Id$
- * @link       http://pear.php.net/package/PackageName
+ *
+ * @see       http://pear.php.net/package/PackageName
  * @since      File available since Release 1.0.0
  */
+
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
@@ -26,11 +29,12 @@ use Symfony\Component\Validator\Constraints as Assert;
 /**
  * Entity class for live translations.
  *
- * @package    App\Entity
  * @author     Andreas Kempe <andreas.kempe@byte-artist.de>
  * @copyright  2018-2019 byte-artist
  * @license    http://www.php.net/license/3_01.txt  PHP License 3.01
+ *
  * @version    Release: @package_version@
+ *
  * @since      Class available since Release 1.0.0
  */
 class Live
@@ -69,8 +73,6 @@ class Live
 
     /**
      * @param string $sourceFile
-     *
-     * @return Live
      */
     public function setSourceFile($sourceFile): Live
     {
@@ -89,8 +91,6 @@ class Live
 
     /**
      * @param string $sourceFileName
-     *
-     * @return Live
      */
     public function setSourceFileName($sourceFileName): Live
     {
@@ -99,18 +99,13 @@ class Live
         return $this;
     }
 
-    /**
-     * @return string|null
-     */
-    public function getSourceFileName(): ? string
+    public function getSourceFileName(): ?string
     {
         return $this->sourceFileName;
     }
 
     /**
      * @param string $translationFileName
-     *
-     * @return Live
      */
     public function setTranslationFileName($translationFileName): Live
     {
@@ -119,9 +114,6 @@ class Live
         return $this;
     }
 
-    /**
-     * @return string|null
-     */
     public function getTranslationFileName(): ?string
     {
         return $this->translationFileName;
@@ -129,8 +121,6 @@ class Live
 
     /**
      * @param string $translationFile
-     *
-     * @return Live
      */
     public function setTranslationFile($translationFile): Live
     {
@@ -149,8 +139,6 @@ class Live
 
     /**
      * @param string $translationLanguage
-     *
-     * @return Live
      */
     public function setTranslationLanguage($translationLanguage): Live
     {
@@ -159,9 +147,6 @@ class Live
         return $this;
     }
 
-    /**
-     * @return string|null
-     */
     public function getTranslationLanguage(): ?string
     {
         return $this->translationLanguage;

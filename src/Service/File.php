@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Static service for file operations.
  *
@@ -10,14 +11,16 @@
  * the PHP License and are unable to obtain it through the web, please
  * send a note to license@php.net so we can mail you a copy immediately.
  *
- * @package    App\Service
  * @author     Andreas Kempe <andreas.kempe@byte-artist.de>
  * @copyright  2018-2019 byte-artist
  * @license    http://www.php.net/license/3_01.txt  PHP License 3.01
+ *
  * @version    GIT: $Id$
- * @link       http://pear.php.net/package/PackageName
+ *
+ * @see       http://pear.php.net/package/PackageName
  * @since      File available since Release 1.0.0
  */
+
 namespace App\Service;
 
 use DirectoryIterator;
@@ -30,11 +33,12 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
 /**
  * Static service for file operations.
  *
- * @package    App\Service
  * @author     Andreas Kempe <andreas.kempe@byte-artist.de>
  * @copyright  2018-2019 byte-artist
  * @license    http://www.php.net/license/3_01.txt  PHP License 3.01
+ *
  * @version    Release: @package_version@
+ *
  * @since      Class available since Release 1.0.0
  */
 class File
@@ -44,8 +48,6 @@ class File
      *
      * @param $sourceDirectory
      * @param string $translationLanguage
-     *
-     * @return array
      */
     public static function collectTranslationFiles($sourceDirectory, $translationLanguage = 'en'): array
     {
@@ -70,8 +72,6 @@ class File
      *
      * @param $fileName
      * @param $sourceDirectory
-     *
-     * @return array
      */
     public static function searchCurrentTranslationFiles($fileName, $sourceDirectory): array
     {
@@ -97,8 +97,6 @@ class File
      *
      * @param UploadedFile $sourceFile
      * @param string       $destinationDir
-     *
-     * @return string
      */
     public static function moveUniqueUploadedFile($sourceFile, $destinationDir): string
     {
@@ -116,8 +114,6 @@ class File
      *
      * @param string $directory
      * @param bool   $ignoreHiddenFiles
-     *
-     * @return bool|null
      */
     public static function isDirEmpty($directory, $ignoreHiddenFiles = false): ?bool
     {
@@ -146,8 +142,6 @@ class File
      * removes given directory recursive.
      *
      * @param $dir
-     *
-     * @return bool
      */
     public static function rmDirRecursive($dir): bool
     {
@@ -172,8 +166,6 @@ class File
      * clean dir, also recursive delete folder.
      *
      * @param $dir
-     *
-     * @return bool
      */
     public static function cleanDir($dir): bool
     {
