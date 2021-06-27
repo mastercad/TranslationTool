@@ -53,6 +53,7 @@ jobs:
       run: |
         cp .php-cs-fixer.dist.php .php-cs-fixer.php
         cp .php_cs.dist .php_cs
+        cp phpcs.xml.dist phpcs.xml
 
     - name: php-codesniffer
       uses: pipeline-components/php-codesniffer@v0.12.3
