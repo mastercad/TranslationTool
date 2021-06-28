@@ -6,9 +6,18 @@
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
 
         {% block stylesheets %}
-            {{ encore_entry_link_tags('app') }}
+            {{ encore_entry_link_tags('app.css') }}
             {{ encore_entry_link_tags('totop.css') }}
         {% endblock %}
+
+{#        {% block javascripts %}
+            <script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
+<!--            <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+            <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
+            <script src="{{ path('fos_js_routing_js', { callback: 'fos.Router.setData' }) }}"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/es6-promise/4.0.5/es6-promise.auto.min.js"></script>
+            <script src="{{ asset('assets/js/layout.js') }}"></script>-->
+        {% endblock %} #}
 
     </head>
     <body>
@@ -116,8 +125,10 @@
         <div class="top-anchor"></div>
 
         {% block javascripts %}
-            {{ encore_entry_script_tags('app') }}
-            {{ encore_entry_script_tags('totop') }}
+            <script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
+            <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+            {{ encore_entry_script_tags('app.js') }}
+            {{ encore_entry_script_tags('totop.js') }}
         {% endblock %}
 
         <script type="text/javascript" language="javascript">
@@ -129,9 +140,9 @@
                 });
 
                 $('[data-toggle="tooltip"]').tooltip();
-            });
 
-            $('.top-anchor').UItoTop();
+                $('.top-anchor').UItoTop();
+            });
         </script>
 
     </body>
