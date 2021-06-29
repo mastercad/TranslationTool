@@ -1,5 +1,7 @@
 translation tool
 ================
+[![Quality Assurance](https://github.com/mastercad/TranslationTool/actions/workflows/quality_assurance.yml/badge.svg)](https://github.com/mastercad/TranslationTool/actions/workflows/quality_assurance.yml) [![Tag Release](https://github.com/mastercad/TranslationTool/actions/workflows/tag_release.yml/badge.svg)](https://github.com/mastercad/TranslationTool/actions/workflows/tag_release.yml) [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=mastercad_TranslationTool&metric=alert_status)](https://sonarcloud.io/dashboard?id=mastercad_TranslationTool) [![Deploy Application](https://github.com/mastercad/translation-tool/actions/workflows/deploy_application.yml/badge.svg)](https://github.com/mastercad/translation-tool/actions/workflows/deploy_application.yml)
+
 
 A Symfony project created on December 27, 2016, 12:49 pm.
 
@@ -19,10 +21,15 @@ apt install php7.0-zip
 checkout project:
 -----------------
 
-git clone git@degitlab.pe.local:a.kempe/translation-tool.git
+git clone git@github.com:mastercad/translation-tool.git
 cd translation-tool
 
 composer install
+
+yarn install
+yarn run encore --production
+
+bin/console assets:install
 
 start server:
 -------------

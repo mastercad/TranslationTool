@@ -55,14 +55,14 @@ jobs:
         cp .php_cs.dist .php_cs
         cp phpcs.xml.dist phpcs.xml
 
-#      - name: Cache node_modules
-#        uses: actions/cache@v1
-#        id: yarn-cache-node-modules
-#        with:
-#          path: node_modules
-#          key: ${{ runner.os }}-yarn-cache-node-modules-${{ hashFiles('**/yarn.lock') }}
-#          restore-keys: |
-#            ${{ runner.os }}-yarn-cache-node-modules-
+    - name: Cache node_modules
+      uses: actions/cache@v1
+      id: yarn-cache-node-modules
+      with:
+        path: node_modules
+        key: ${{ runner.os }}-yarn-cache-node-modules-${{ hashFiles('**/yarn.lock') }}
+        restore-keys: |
+          ${{ runner.os }}-yarn-cache-node-modules-
 
     - name: Install assets
       run: |
@@ -185,8 +185,8 @@ jobs:
     - name: Cleanup Report Results
       shell: bash
       run: |
-         sed -i 's/\(.*file="\).*TranslationTool\/\(.*"\)/\1\2/g' build/reports/junit.xml
-         sed -i 's/\(.*name="\).*TranslationTool\/\(.*"\)/\1\2/g' build/reports/coverage-clover.xml
+         sed -i 's/\(.*file="\).*translation-tool\/\(.*"\)/\1\2/g' build/reports/junit.xml
+         sed -i 's/\(.*name="\).*translation-tool\/\(.*"\)/\1\2/g' build/reports/coverage-clover.xml
 
     - name: Upload Unit Test Results
       if: always()
