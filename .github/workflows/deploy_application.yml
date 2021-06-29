@@ -122,6 +122,56 @@ jobs:
           script: |
             cd "${{ matrix.server.path }}/releases/${GITHUB_SHA}" && composer install --no-dev --no-interaction --prefer-dist --no-progress
 
+      - name: Install assets
+        uses: appleboy/ssh-action@master
+        env:
+          GITHUB_SHA: ${{ github.sha }}
+        with:
+          host: ${{ matrix.server.ip }}
+          username: ${{ matrix.server.username }}
+          password: ${{ secrets.WEB_USER_PASSWORD }}
+          port: ${{ matrix.server.port }}
+          envs: GITHUB_SHA
+          script: |
+            chmod +x "${{ matrix.server.path }}/releases/${GITHUB_SHA}/bin/console"
+            php "${{ matrix.server.path }}/releases/${GITHUB_SHA}/bin/console" assets:install public
+
+#      - name: Cache node_modules
+#        uses: actions/cache@v1
+#        id: yarn-cache-node-modules
+#        with:
+#          path: node_modules
+#          key: ${{ runner.os }}-yarn-cache-node-modules-${{ hashFiles('**/yarn.lock') }}
+#          restore-keys: |
+#            ${{ runner.os }}-yarn-cache-node-modules-
+
+      - name: Yarn install
+        uses: appleboy/ssh-action@master
+#        if: steps.yarn-cache-node-modules.outputs.cache-hit != 'true'
+        env:
+          GITHUB_SHA: ${{ github.sha }}
+        with:
+          host: ${{ matrix.server.ip }}
+          username: ${{ matrix.server.username }}
+          password: ${{ secrets.WEB_USER_PASSWORD }}
+          port: ${{ matrix.server.port }}
+          envs: GITHUB_SHA
+          script: |
+            cd "${{ matrix.server.path }}/releases/${GITHUB_SHA}" && yarn install
+
+      - name: Yarn build
+        uses: appleboy/ssh-action@master
+        env:
+          GITHUB_SHA: ${{ github.sha }}
+        with:
+          host: ${{ matrix.server.ip }}
+          username: ${{ matrix.server.username }}
+          password: ${{ secrets.WEB_USER_PASSWORD }}
+          port: ${{ matrix.server.port }}
+          envs: GITHUB_SHA
+          script: |
+            cd "${{ matrix.server.path }}/releases/${GITHUB_SHA}" && yarn run encore production
+
       - name: Provide secrets
         uses: appleboy/ssh-action@master
         env:
