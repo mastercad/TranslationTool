@@ -241,7 +241,7 @@ jobs:
             rm -rf "$ACTIVE_RELEASE_PATH/var/log"
             ln -s -n -f "$BASE_PATH/var/log" "$ACTIVE_RELEASE_PATH/var/"
             rm -rf "$ACTIVE_RELEASE_PATH/public/images/content/dynamisch"
-            ln -s -n -f "$BASE_PATH/public/images" "$ACTIVE_RELEASE_PATH/public/"
+            ln -s -n -f "$BASE_PATH/public/images/content/dynamisch" "$ACTIVE_RELEASE_PATH/public/content/"
             rm -rf "$ACTIVE_RELEASE_PATH/public/upload"
             ln -s -n -f "$BASE_PATH/public/upload" "$ACTIVE_RELEASE_PATH/public/"
 
