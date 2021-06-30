@@ -219,8 +219,7 @@ jobs:
           port: ${{ matrix.server.port }}
           envs: GITHUB_SHA
           script: |
-            mkdir -p "${{ matrix.server.path }}/releases/${GITHUB_SHA}/public/images/content"
-            mkdir -p "${{ matrix.server.path }}/releases/${GITHUB_SHA}/var"
+            mkdir -p "${{ matrix.server.path }}/releases/${GITHUB_SHA}/var/uploads/xliff"
 
       - name: Activate release
         uses: appleboy/ssh-action@master
@@ -240,10 +239,8 @@ jobs:
             ln -s -n -f "$RELEASE_PATH" "$ACTIVE_RELEASE_PATH"
             rm -rf "$ACTIVE_RELEASE_PATH/var/log"
             ln -s -n -f "$BASE_PATH/var/log" "$ACTIVE_RELEASE_PATH/var/"
-            rm -rf "$ACTIVE_RELEASE_PATH/public/images/content/dynamisch"
-            ln -s -n -f "$BASE_PATH/public/images/content/dynamisch" "$ACTIVE_RELEASE_PATH/public/content/"
-            rm -rf "$ACTIVE_RELEASE_PATH/public/upload"
-            ln -s -n -f "$BASE_PATH/public/upload" "$ACTIVE_RELEASE_PATH/public/"
+            rm -rf "$ACTIVE_RELEASE_PATH/var/uploads"
+            ln -s -n -f "$BASE_PATH/var/uploads" "$ACTIVE_RELEASE_PATH/var/"
 
   run-after-hooks:
     name: "${{ matrix.server.name }}: After hook"
