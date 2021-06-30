@@ -239,7 +239,6 @@ jobs:
             rm -r "$ACTIVE_RELEASE_PATH"
             ln -s -n -f "$RELEASE_PATH" "$ACTIVE_RELEASE_PATH"
             rm -rf "$ACTIVE_RELEASE_PATH/var/log"
-            ls -lisa "$ACTIVE_RELEASE_PATH/var/"
             ln -s -n -f "$BASE_PATH/var/log" "$ACTIVE_RELEASE_PATH/var/"
             rm -rf "$ACTIVE_RELEASE_PATH/public/images/content/dynamisch"
             ln -s -n -f "$BASE_PATH/public/images" "$ACTIVE_RELEASE_PATH/public/"
