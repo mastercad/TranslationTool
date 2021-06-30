@@ -80,35 +80,6 @@ jobs:
             mkdir -p "${{ matrix.server.path }}/releases/${GITHUB_SHA}"
             tar xzf ${{ matrix.server.path }}/artifacts/${GITHUB_SHA}.tar.gz -C "${{ matrix.server.path }}/releases/${GITHUB_SHA}"
 
-      - name: Cleanup directories
-        uses: appleboy/ssh-action@master
-        env:
-          GITHUB_SHA: ${{ github.sha }}
-        with:
-          host: ${{ matrix.server.ip }}
-          username: ${{ matrix.server.username }}
-          password: ${{ secrets.WEB_USER_PASSWORD }}
-          port: ${{ matrix.server.port }}
-          envs: GITHUB_SHA
-          script: |
-            rm -rf "${{ matrix.server.path }}/releases/${GITHUB_SHA}/var/log"
-            rm -rf "${{ matrix.server.path }}/releases/${GITHUB_SHA}/public/images/content/dynamisch"
-            rm -rf "${{ matrix.server.path }}/releases/${GITHUB_SHA}/public/upload"
-
-      - name: Create directories
-        uses: appleboy/ssh-action@master
-        env:
-          GITHUB_SHA: ${{ github.sha }}
-        with:
-          host: ${{ matrix.server.ip }}
-          username: ${{ matrix.server.username }}
-          password: ${{ secrets.WEB_USER_PASSWORD }}
-          port: ${{ matrix.server.port }}
-          envs: GITHUB_SHA
-          script: |
-            mkdir -p "${{ matrix.server.path }}/releases/${GITHUB_SHA}/public/images/content"
-            mkdir -p "${{ matrix.server.path }}/releases/${GITHUB_SHA}/var"
-
       - name: Composer install
         uses: appleboy/ssh-action@master
         env:
@@ -219,6 +190,38 @@ jobs:
       matrix:
         server: ${{ fromJson(needs.create-deployment-artifacts.outputs.deployment-matrix) }}
     steps:
+      - name: Cleanup directories
+        uses: appleboy/ssh-action@master
+        env:
+          GITHUB_SHA: ${{ github.sha }}
+          RELEASE_PATH: ${{ matrix.server.path }}/releases/${{ github.sha }}
+          ACTIVE_RELEASE_PATH: ${{ matrix.server.path }}/current
+          BASE_PATH: ${{ matrix.server.path }}
+        with:
+          host: ${{ matrix.server.ip }}
+          username: ${{ matrix.server.username }}
+          password: ${{ secrets.WEB_USER_PASSWORD }}
+          port: ${{ matrix.server.port }}
+          envs: GITHUB_SHA
+          script: |
+            rm -rf "$ACTIVE_RELEASE_PATH/var/log"
+            rm -rf "$ACTIVE_RELEASE_PATH/public/images/content/dynamisch"
+            rm -rf "$ACTIVE_RELEASE_PATH/public/upload"
+
+      - name: Create directories
+        uses: appleboy/ssh-action@master
+        env:
+          GITHUB_SHA: ${{ github.sha }}
+        with:
+          host: ${{ matrix.server.ip }}
+          username: ${{ matrix.server.username }}
+          password: ${{ secrets.WEB_USER_PASSWORD }}
+          port: ${{ matrix.server.port }}
+          envs: GITHUB_SHA
+          script: |
+            mkdir -p "${{ matrix.server.path }}/releases/${GITHUB_SHA}/public/images/content"
+            mkdir -p "${{ matrix.server.path }}/releases/${GITHUB_SHA}/var"
+
       - name: Activate release
         uses: appleboy/ssh-action@master
         env:
