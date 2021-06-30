@@ -120,7 +120,8 @@ jobs:
           port: ${{ matrix.server.port }}
           envs: GITHUB_SHA
           script: |
-            cd "${{ matrix.server.path }}/releases/${GITHUB_SHA}" && composer install --no-dev --no-interaction --prefer-dist --no-progress
+            cd "${{ matrix.server.path }}/releases/${GITHUB_SHA}"
+            composer install --no-dev --no-interaction --prefer-dist --no-progress
 
       - name: Install assets
         uses: appleboy/ssh-action@master
