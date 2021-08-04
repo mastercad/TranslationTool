@@ -76,7 +76,7 @@ class DefaultControllerTest extends WebTestCase
             9988
         );
 
-        $uploadDirectory = $client->getKernel()->getContainer()->getParameter('upload_directory');
+        $xliffUploadDirectory = $client->getKernel()->getContainer()->getParameter('xliff_directory');
 
         $form = $crawler->filter('button#live_translate')->form();
         $form['live[sourceFile]']->upload($sourceFile);
@@ -88,8 +88,8 @@ class DefaultControllerTest extends WebTestCase
         $this->assertNotEmpty($redirectInformation);
         $this->assertEquals('source.de.xlf', $redirectInformation['exportFileName']);
 
-        $this->assertFileExists($uploadDirectory.'/'.$redirectInformation['from']);
-        $this->assertFileExists($uploadDirectory.'/'.$redirectInformation['to']);
+        $this->assertFileExists($xliffUploadDirectory.'/'.$redirectInformation['from']);
+        $this->assertFileExists($xliffUploadDirectory.'/'.$redirectInformation['to']);
 
         $this->assertEquals(302, $client->getResponse()->getStatusCode());
         $this->assertStringContainsString(
@@ -361,29 +361,29 @@ class DefaultControllerTest extends WebTestCase
     public function testTranslateOverviewActionFromUpload(): void
     {
         $client = static::createClient();
-        $uploadDirectory = $client->getKernel()->getContainer()->getParameter('upload_directory');
+        $xliffUploadDirectory = $client->getKernel()->getContainer()->getParameter('xliff_directory');
 
-        if (file_exists($uploadDirectory)) {
-            $this->assertTrue(File::cleanDir($uploadDirectory));
+        if (file_exists($xliffUploadDirectory)) {
+            $this->assertTrue(File::cleanDir($xliffUploadDirectory));
         } else {
-            mkdir($uploadDirectory, 0777, true);
+            mkdir($xliffUploadDirectory, 0777, true);
         }
 
         copy(
             __DIR__.'/../Service/Xliff/files/source.en.xlf',
-            $uploadDirectory.'/source_upload.en.xlf'
+            $xliffUploadDirectory.'/source_upload.en.xlf'
         );
         copy(
             __DIR__.'/../Service/Xliff/files/source.de.xlf',
-            $uploadDirectory.'/source_upload.de.xlf'
+            $xliffUploadDirectory.'/source_upload.de.xlf'
         );
         copy(
             __DIR__.'/../Service/Xliff/files/file_with_missing_trans.de.xlf',
-            $uploadDirectory.'/file_with_missing_trans.de.xlf'
+            $xliffUploadDirectory.'/file_with_missing_trans.de.xlf'
         );
         copy(
             __DIR__.'/../Service/Xliff/files/file_with_missing_and_empty_trans.de.xlf',
-            $uploadDirectory.'/file_with_missing_and_empty_trans.de.xlf'
+            $xliffUploadDirectory.'/file_with_missing_and_empty_trans.de.xlf'
         );
         $crawler = $client->request(
             'GET',

@@ -11,6 +11,13 @@
 /public/bundles/
 /var/
 /vendor/
+/bin/
+/build
+
+/.vscode
+
+tmp-phpqa
+
 ###< symfony/framework-bundle ###
 
 ###> friendsofphp/php-cs-fixer ###
@@ -40,3 +47,5 @@
 npm-debug.log
 yarn-error.log
 ###< symfony/webpack-encore-bundle ###
+
+/docker.gpg

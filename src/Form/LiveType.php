@@ -26,11 +26,15 @@ namespace App\Form;
 use App\Entity\Live as LiveEntity;
 use App\Helper\Translations;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
+use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Exception\TransformationFailedException;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Form\FormEvent;
+use Symfony\Component\Form\FormEvents;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
@@ -44,7 +48,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
  *
  * @since      Class available since Release 1.0.0
  */
-class LiveType extends AbstractType
+class LiveType extends AbstractType implements EventSubscriberInterface
 {
     /** @var ParameterBagInterface|null */
     private $params = null;
@@ -89,7 +93,35 @@ class LiveType extends AbstractType
                 'required' => false,
             ])
             ->add('translate', SubmitType::class)
-        ;
+        ; 
+        // telling the form builder about the new event subscriber
+        $builder->addEventSubscriber($this);
+    } 
+    
+    public static function getSubscribedEvents()
+    {
+        return [
+            FormEvents::SUBMIT => 'ensureTranslationFileOrLanguageIsSubmitted',
+        ];
+    }
+ 
+    public function ensureTranslationFileOrLanguageIsSubmitted(FormEvent $event)
+    {
+        /** @var LiveEntity $submittedData*/
+        $submittedData = $event->getData();
+ 
+        // just checking for `null` here, but you may want to check for an empty string or something like that
+        if (null === $submittedData->getTranslationFile()
+            && null === $submittedData->getTranslationLanguage()
+        ) {
+            throw new TransformationFailedException(
+                'error.translation_file_or_translation_language_must_set',
+                0, // code
+                null, // previous
+                'error.translation_file_or_translation_language_must_set', // user message
+                ['{{ whatever }}' => 'here'] // message context for the translater
+            );
+        }
     }
 
     public function configureOptions(OptionsResolver $resolver): void

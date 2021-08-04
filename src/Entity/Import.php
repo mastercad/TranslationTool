@@ -23,7 +23,6 @@
 
 namespace App\Entity;
 
-use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
@@ -40,8 +39,6 @@ use Symfony\Component\Validator\Constraints as Assert;
 class Import
 {
     /**
-     * @ORM\Column(type="string")
-     *
      * @Assert\NotBlank(message="Please, upload the translation package zip file.")
      * @Assert\File(mimeTypes={ "application/zip", "zip" })
      */
