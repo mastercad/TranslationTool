@@ -53,8 +53,6 @@ class Live
 
     private $translationFileName;
 
-    /**
-     */
     private $translationLanguage;
 
     /**

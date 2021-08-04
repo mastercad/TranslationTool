@@ -53,11 +53,24 @@ class LiveType extends AbstractType implements EventSubscriberInterface
     /** @var ParameterBagInterface|null */
     private $params = null;
 
+    /**
+     * CTOR for LiveType.
+     *
+     * @param ParameterBagInterface $params
+     */
     public function __construct(ParameterBagInterface $params)
     {
         $this->params = $params;
     }
 
+    /**
+     * Build Form.
+     *
+     * @param FormBuilderInterface $builder
+     * @param array $options
+     *
+     * @return void
+     */
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $translationsHelper = new Translations(
@@ -97,14 +110,26 @@ class LiveType extends AbstractType implements EventSubscriberInterface
         // telling the form builder about the new event subscriber
         $builder->addEventSubscriber($this);
     }
-    
+
+    /**
+     * Provides subscribed events.
+     *
+     * @return void
+     */
     public static function getSubscribedEvents()
     {
         return [
             FormEvents::SUBMIT => 'ensureTranslationFileOrLanguageIsSubmitted',
         ];
     }
- 
+
+    /**
+     * Ensures at least Translation File or Translation Language is set.
+     *
+     * @param FormEvent $event
+     *
+     * @return void
+     */
     public function ensureTranslationFileOrLanguageIsSubmitted(FormEvent $event)
     {
         /** @var LiveEntity $submittedData*/
@@ -124,6 +149,13 @@ class LiveType extends AbstractType implements EventSubscriberInterface
         }
     }
 
+    /**
+     * Configures given resolver.
+     *
+     * @param OptionsResolver $resolver
+     *
+     * @return void
+     */
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
