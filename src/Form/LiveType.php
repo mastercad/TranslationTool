@@ -96,7 +96,7 @@ class LiveType extends AbstractType implements EventSubscriberInterface
 
         // telling the form builder about the new event subscriber
         $builder->addEventSubscriber($this);
-    } 
+    }
     
     public static function getSubscribedEvents()
     {
