@@ -114,7 +114,9 @@ class LiveController extends AbstractController
             }
             $liveEntity->setTranslationFileName($translationFileName);
 
-            $translationFileLanguage = Extractor::extractLanguageFromFileName($translationFile->getClientOriginalName());
+            $translationFileLanguage = Extractor::extractLanguageFromFileName(
+                $translationFile->getClientOriginalName()
+            );
 
             $translationLanguage = $translationFileLanguage ? $translationFileLanguage : $translationLanguage;
 

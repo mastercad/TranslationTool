@@ -92,8 +92,8 @@ class LiveType extends AbstractType implements EventSubscriberInterface
                 'translation_domain' => 'labels',
                 'required' => false,
             ])
-            ->add('translate', SubmitType::class)
-        ; 
+            ->add('translate', SubmitType::class);
+
         // telling the form builder about the new event subscriber
         $builder->addEventSubscriber($this);
     } 
