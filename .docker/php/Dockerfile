@@ -70,7 +70,10 @@ RUN pecl install xdebug && \
     echo "display_errors = On" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini && \
     echo "xdebug.mode = develop,debug" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini && \
     echo "xdebug.client_host = 172.17.0.1" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini && \
-    echo "xdebug.start_with_request = yes" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
+    echo "xdebug.start_with_request = yes" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini && \
+#    echo "xdebug.file_link_format = 'vscode://file/media/Austausch/Projekte/PHP/translation-tool/%f:%l:%c>'" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
+    echo "xdebug.file_link_format = 'vscode://file/media/Austausch/Projekte/PHP/translation-tool/%f:%l:%c>'" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
+#    echo "xdebug.file_link_format = 'vscode://file%f:%l&/app/>/media/Austausch/Projekte/PHP/translation-tool/'" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
 
 RUN pecl install memcached && \
   docker-php-ext-enable memcached

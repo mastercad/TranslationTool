@@ -55,8 +55,6 @@ class LiveType extends AbstractType implements EventSubscriberInterface
 
     /**
      * CTOR for LiveType.
-     *
-     * @param ParameterBagInterface $params
      */
     public function __construct(ParameterBagInterface $params)
     {
@@ -65,11 +63,6 @@ class LiveType extends AbstractType implements EventSubscriberInterface
 
     /**
      * Build Form.
-     *
-     * @param FormBuilderInterface $builder
-     * @param array $options
-     *
-     * @return void
      */
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
@@ -126,35 +119,23 @@ class LiveType extends AbstractType implements EventSubscriberInterface
     /**
      * Ensures at least Translation File or Translation Language is set.
      *
-     * @param FormEvent $event
-     *
      * @return void
      */
     public function ensureTranslationFileOrLanguageIsSubmitted(FormEvent $event)
     {
-        /** @var LiveEntity $submittedData*/
+        /** @var LiveEntity $submittedData */
         $submittedData = $event->getData();
- 
+
         // just checking for `null` here, but you may want to check for an empty string or something like that
         if (null === $submittedData->getTranslationFile()
             && null === $submittedData->getTranslationLanguage()
         ) {
-            throw new TransformationFailedException(
-                'error.translation_file_or_translation_language_must_set',
-                0, // code
-                null, // previous
-                'error.translation_file_or_translation_language_must_set', // user message
-                ['{{ whatever }}' => 'here'] // message context for the translater
-            );
+            throw new TransformationFailedException('error.translation_file_or_translation_language_must_set', 0, /* code */ null, /* previous */ 'error.translation_file_or_translation_language_must_set', /* user message */ ['{{ whatever }}' => 'here'] /* message context for the translater */);
         }
     }
 
     /**
      * Configures given resolver.
-     *
-     * @param OptionsResolver $resolver
-     *
-     * @return void
      */
     public function configureOptions(OptionsResolver $resolver): void
     {
