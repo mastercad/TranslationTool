@@ -94,7 +94,6 @@ class DefaultController extends AbstractController
     {
         $importEntity = new ImportEntity();
 
-//        $this->get('session')->set('_locale', $request->get('_locale'));
         $request->getSession()->set('_locale', $request->get('_locale'));
 
         $form = $this->createForm(ImportType::class, $importEntity, [
@@ -275,7 +274,7 @@ class DefaultController extends AbstractController
             $path = $this->getParameter('translations_directory');
             $overwriteTranslationFile = true;
         } else {
-            $path = $this->getParameter('upload_directory');
+            $path = $this->getParameter('xliff_directory');
         }
 
         try {

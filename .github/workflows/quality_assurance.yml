@@ -38,13 +38,19 @@ jobs:
     - name: Install dependencies
       run: composer install --no-interaction --prefer-dist --no-progress
 
+    - name: Debug output ls -lisa
+      run: ls -lisa
+
+    - name: Debug output ls -lisa bin
+      run: ls -lisa bin/
+
     - name: provide secrets
       env:
         SYMFONY_DECRYPTION_SECRET: ${{ secrets.SYMFONY_DECRYPTION_SECRET }}
       run: php bin/console secrets:decrypt-to-local --force --env=prod
 
     - name: Check that environment is configured correctly
-      run: php ./bin/requirements-checker
+      run: php bin/requirements-checker
 
     - name: PHP Security Checker
       uses: StephaneBour/actions-php-security-checker@1.1

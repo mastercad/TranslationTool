@@ -64,7 +64,6 @@ class LiveController extends AbstractController
      */
     public function indexAction(TranslatorInterface $translator, Request $request): Response
     {
-//        $this->get('session')->set('_locale', $request->get('_locale'));
         $request->getSession()->set('_locale', $request->get('_locale'));
 
         $liveEntity = new LiveEntity();
@@ -115,6 +114,12 @@ class LiveController extends AbstractController
             }
             $liveEntity->setTranslationFileName($translationFileName);
 
+            $translationFileLanguage = Extractor::extractLanguageFromFileName(
+                $translationFile->getClientOriginalName()
+            );
+
+            $translationLanguage = $translationFileLanguage ? $translationFileLanguage : $translationLanguage;
+
             return $this->redirect(
                 $this->generateUrl(
                     'translate-overview',
@@ -122,9 +127,7 @@ class LiveController extends AbstractController
                         'from' => $liveEntity->getSourceFileName(),
                         'exportFileName' => $exportFileName,
                         'to' => $translationFileName,
-                        'sourceLanguage' => Extractor::extractLanguageFromFileName(
-                            $sourceFile->getClientOriginalName()
-                        ),
+                        'sourceLanguage' => $translationLanguage,
                         'lang' => $translationLanguage,
                     ]
                 )

@@ -1,6 +1,6 @@
 
 ###> symfony/framework-bundle ###
-/.env
+.env
 /.env.test
 /.env.dev*
 /.env.prod*
@@ -11,6 +11,12 @@
 /public/bundles/
 /var/
 /vendor/
+/build
+
+/.vscode
+
+tmp-phpqa
+
 ###< symfony/framework-bundle ###
 
 ###> friendsofphp/php-cs-fixer ###
@@ -40,3 +46,5 @@
 npm-debug.log
 yarn-error.log
 ###< symfony/webpack-encore-bundle ###
+
+/docker.gpg

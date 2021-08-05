@@ -4,11 +4,11 @@
 # Put parameters here that don't need to change on each machine where the app is deployed
 # https://symfony.com/doc/current/best_practices.html#use-parameters-for-application-configuration
 parameters:
-    allowed_locales: en|de|fr
+    allowed_locales: en|de
     locale: 'en'
-    xliff_directory: '%kernel.project_dir%/../var/uploads/xliff'
-    upload_directory: '%kernel.project_dir%/../var/uploads'
-    translations_directory: '%kernel.project_dir%/../var/translations'
+    xliff_directory: '%kernel.project_dir%/var/uploads/xliff'
+    upload_directory: '%kernel.project_dir%/var/uploads'
+    translations_directory: '%kernel.project_dir%/var/translations'
 
 
 services:

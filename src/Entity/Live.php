@@ -23,7 +23,6 @@
 
 namespace App\Entity;
 
-use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
@@ -40,35 +39,20 @@ use Symfony\Component\Validator\Constraints as Assert;
 class Live
 {
     /**
-     * @ORM\Column(type="string")
-     *
      * @Assert\NotBlank(message="Please, upload the source xliff file.")
      * @Assert\File(mimeTypes={ "text/xml", "application/xml", "xlf" })
      */
     private $sourceFile;
 
-    /**
-     * @ORM\Column(type="string")
-     */
     private $sourceFileName;
 
     /**
-     * @ORM\Column(type="string")
-     *
      * @Assert\File(mimeTypes={ "text/xml", "application/xml", "xlf" })
      */
     private $translationFile;
 
-    /**
-     * @ORM\Column(type="string")
-     */
     private $translationFileName;
 
-    /**
-     * @ORM\Column(type="string")
-     *
-     * \\@Assert\NotBlank(message="Please, select a language to translate.")
-     */
     private $translationLanguage;
 
     /**

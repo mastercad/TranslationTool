@@ -48,24 +48,32 @@ RUN docker-php-ext-configure intl && \
 # install xdebug
 RUN pecl install xdebug && \
     docker-php-ext-enable xdebug && \
+#    echo "error_reporting = E_ALL" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini && \
+#    echo "xdebug.default_enable = 1" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini && \
+#    echo "xdebug.remote_autostart = 0" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini && \
+#    echo "display_startup_errors = On" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini && \
+#    echo "display_errors = On" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini && \
+#    echo "xdebug.collect_return=1" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini && \
+#    echo "xdebug.collect_assignments=1" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini && \
+#    echo "xdebug.max_nesting_level = 250" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini && \
+#    echo "xdebug.remote_handler = \"dbgp\"" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini && \
+#    echo "xdebug.remote_enable = 1" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini && \
+#    echo "xdebug.remote_connect_back = 1" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini && \
+#    echo "xdebug.idekey = \"VSCODE\"" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini && \
+#    echo "xdebug.remote_port = 9003" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini && \
+#    echo "xdebug.var_display_max_depth = 5" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini && \
+#    echo "xdebug.var_display_max_children = 256" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini && \
+#    echo "xdebug.var_display_max_data = 1024" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini && \
+#    echo "xdebug.remote_host={{ hostvars[inventory_hostname]['ohai_network']['default_gateway'] }}" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
     echo "error_reporting = E_ALL" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini && \
-    echo "xdebug.default_enable = 1" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini && \
-    echo "xdebug.remote_autostart = 0" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini && \
     echo "display_startup_errors = On" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini && \
     echo "display_errors = On" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini && \
-    echo "xdebug.collect_return=1" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini && \
-    echo "xdebug.collect_assignments=1" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini && \
-    echo "xdebug.max_nesting_level = 250" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini && \
-    echo "xdebug.remote_handler = \"dbgp\"" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini && \
-    echo "xdebug.remote_enable = 1" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini && \
-    echo "xdebug.remote_connect_back = 1" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini && \
-    echo "xdebug.remote_autostart = 0" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini && \
-    echo "xdebug.idekey = \"PHPSTORM\"" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini && \
-    echo "xdebug.remote_port = 9000" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini && \
-    echo "xdebug.var_display_max_depth = 5" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini && \
-    echo "xdebug.var_display_max_children = 256" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini && \
-    echo "xdebug.var_display_max_data = 1024" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini && \
-    echo "xdebug.remote_host={{ hostvars[inventory_hostname]['ohai_network']['default_gateway'] }}" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
+    echo "xdebug.mode = develop,debug" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini && \
+    echo "xdebug.client_host = 172.17.0.1" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini && \
+    echo "xdebug.start_with_request = yes" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini && \
+#    echo "xdebug.file_link_format = 'vscode://file/media/Austausch/Projekte/PHP/translation-tool/%f:%l:%c>'" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
+    echo "xdebug.file_link_format = 'vscode://file/media/Austausch/Projekte/PHP/translation-tool/%f:%l:%c>'" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
+#    echo "xdebug.file_link_format = 'vscode://file%f:%l&/app/>/media/Austausch/Projekte/PHP/translation-tool/'" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
 
 RUN pecl install memcached && \
   docker-php-ext-enable memcached
