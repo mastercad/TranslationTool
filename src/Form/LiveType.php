@@ -130,7 +130,13 @@ class LiveType extends AbstractType implements EventSubscriberInterface
         if (null === $submittedData->getTranslationFile()
             && null === $submittedData->getTranslationLanguage()
         ) {
-            throw new TransformationFailedException('error.translation_file_or_translation_language_must_set', 0, /* code */ null, /* previous */ 'error.translation_file_or_translation_language_must_set', /* user message */ ['{{ whatever }}' => 'here'] /* message context for the translater */);
+            throw new TransformationFailedException(
+                'error.translation_file_or_translation_language_must_set',
+                0,
+                null,
+                'error.translation_file_or_translation_language_must_set',
+                ['{{ whatever }}' => 'here']
+            );
         }
     }
 
