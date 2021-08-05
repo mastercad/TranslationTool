@@ -636,5 +636,4 @@ class DefaultController extends AbstractController
 
         return $formBuilder->getForm();
     }
-    {
 }
